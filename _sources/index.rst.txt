@@ -13,11 +13,11 @@ exposes APIs to integrate various MAPF planners and retrieve execution statistic
 
 .. raw:: html
 
-   <iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id" 
+   <iframe width="560" height="315" src="https://youtu.be/TX-oGSgM8VQ" 
    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
    gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-*(Replace with actual SMART demo video when available)*
+.. *(Replace with actual SMART demo video when available)*
 
 How to Get It
 -------------
@@ -29,22 +29,23 @@ How to Get It
 **Build from Source**
 
 * :doc:`smart/build_linux` - Build on Ubuntu/Linux
-* :doc:`smart/build_macos` - Build on macOS  
 * :doc:`smart/installation` - General installation guide
 
 How to Use It
 -------------
 
-**Quick Start**
+How to Use It
+-------------
 
-* :doc:`smart/running` - Run your first simulation
-* :doc:`smart/usage` - Detailed usage guide
-* :doc:`smart/examples` - Example scenarios
+SMART provides multiple ways to explore and use the testbed:
 
-**APIs**
+* **Try the Web Demo**: Experience SMART instantly at https://smart-mapf.github.io/demo/ - see :doc:`smart/web_demo` for a full walkthrough
+* **Quick Start**: See :doc:`smart/running` to launch your first simulation
+* **Python API**: Use the :doc:`smart/apis` for programmatic control
+* **Planner Integration**: Connect your MAPF algorithm via :doc:`smart/planner_integration`
+* **Configuration**: Customize simulations using :doc:`smart/settings`
 
-* :doc:`smart/apis` - Core Python APIs
-* :doc:`smart/planner_integration` - Integrate your MAPF planner
+Check out our :doc:`smart/examples` for common use cases.
 
 Tutorials
 ---------
@@ -99,16 +100,18 @@ This project is released under the MIT License.
 
 Copyright © 2025 Carnegie Mellon University
 
+Getting Started
+---------------
+
 .. toctree::
-   :hidden:
    :maxdepth: 2
-   :caption: Getting Started
 
    smart/overview
+   smart/web_demo
    smart/installation
    smart/build_linux
-   smart/build_macos
    smart/running
+   smart/input_formats
 
 .. toctree::
    :hidden:
