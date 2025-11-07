@@ -55,10 +55,25 @@ intersphinx_mapping = {
 
 html_theme = 'sphinx_rtd_theme'
 html_theme_options = {
-    'logo_only': True,
+    'logo_only': False,
+    'display_version': True,
     'navigation_depth': 5,
+    'collapse_navigation': False,
+    'sticky_navigation': True,
+    'includehidden': True,
+    'titles_only': False,
+    'vcs_pageview_mode': 'blob',
 }
-html_context = {}
+html_context = {
+    'display_github': True,
+    'github_user': 'smart-mapf',
+    'github_repo': 'smart',
+    'github_version': 'main',
+    'conf_py_path': '/docs/',
+    # Disable version selector
+    'current_version': 'latest',
+    'versions': [],  # Empty list to hide version dropdown
+}
 
 if not 'READTHEDOCS' in os.environ:
     html_static_path = ['_static/']
@@ -67,6 +82,8 @@ if not 'READTHEDOCS' in os.environ:
 
 # Use project logo if available in _static; otherwise no logo is shown.
 html_logo = None
+html_title = f"{project} {version}"
+html_short_title = project
 html_show_sourcelink = True
 html_favicon = "demo/static/favicon.ico"
 
