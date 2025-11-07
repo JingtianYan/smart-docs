@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Architecture &mdash; SMART 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/debug.js?v=6b900b64"></script>
+    <script src="../_static/js/theme.js"></script>
+    <script src="../_static/js/versions.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Paper and citation" href="paper.html" />
+    <link rel="prev" title="Settings and Configuration" href="settings.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+          </a>
+              <div class="switch-menus">
+                <div class="version-switch"></div>
+                <div class="language-switch"></div>
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_linux.html">Build on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_macos.html">Build on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">Running SMART</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using SMART</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apis.html">Core APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="planner_integration.html">Planner Integration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings and Configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#components">Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#argos-simulator">ARGoS Simulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#action-dependency-graph-adg">Action Dependency Graph (ADG)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rpc-communication">RPC Communication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-client">Python Client</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#execution-flow">Execution Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-flow">Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#design-principles">Design Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-structure">Code Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-system">Build System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#threading-model">Threading Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extending-smart">Extending SMART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="paper.html">Paper and citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ - Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="who_is_using.html">Who is Using SMART?</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SMART</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Architecture</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/smart/architecture.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="architecture">
+<h1>Architecture<a class="headerlink" href="#architecture" title="Link to this heading"></a></h1>
+<p>This page describes SMART’s system architecture and design.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>SMART is built on a modular architecture consisting of:</p>
+<ol class="arabic simple">
+<li><p><strong>Simulator Core</strong> (ARGoS-based)</p></li>
+<li><p><strong>Execution Monitor</strong> (Action Dependency Graph)</p></li>
+<li><p><strong>RPC Server</strong> (Communication layer)</p></li>
+<li><p><strong>Python Client</strong> (API and tools)</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>               ┌─────────────────────────┐
+               │   MAPF Planner          │
+               │   (Your Algorithm)      │
+               └───────────┬─────────────┘
+                           │ Paths
+                           ▼
+               ┌─────────────────────────┐
+               │   Python Client API     │
+               │   (run_sim.py)          │
+               └───────────┬─────────────┘
+                           │ RPC
+                           ▼
+┌──────────────────────────────────────────────┐
+│              SMART Server (C++)              │
+├──────────────────────────────────────────────┤
+│  ┌────────────────────────────────────────┐  │
+│  │   Action Dependency Graph (ADG)        │  │
+│  │   - Parse plans                        │  │
+│  │   - Build dependency graph             │  │
+│  │   - Monitor execution                  │  │
+│  └───────────────┬────────────────────────┘  │
+│                  │                            │
+│  ┌───────────────▼────────────────────────┐  │
+│  │   ARGoS Simulator                      │  │
+│  │   - Physics engine                     │  │
+│  │   - Robot controllers                  │  │
+│  │   - Collision detection                │  │
+│  └────────────────────────────────────────┘  │
+└──────────────────────────────────────────────┘
+                           │
+                           ▼
+               ┌─────────────────────────┐
+               │   Statistics &amp; Logs     │
+               └─────────────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="components">
+<h2>Components<a class="headerlink" href="#components" title="Link to this heading"></a></h2>
+<section id="argos-simulator">
+<h3>ARGoS Simulator<a class="headerlink" href="#argos-simulator" title="Link to this heading"></a></h3>
+<p>SMART uses <a class="reference external" href="https://www.argos-sim.info/">ARGoS 3</a> as the physics-based simulator:</p>
+<ul class="simple">
+<li><p><strong>Physics Engine</strong> - Realistic 2D dynamics and collisions</p></li>
+<li><p><strong>Robot Models</strong> - Differential drive robots (footbots)</p></li>
+<li><p><strong>Sensors</strong> - Position, proximity, obstacle detection</p></li>
+<li><p><strong>Visualization</strong> - 3D OpenGL rendering</p></li>
+</ul>
+<p><strong>Location</strong>: <code class="docutils literal notranslate"><span class="pre">client/</span></code> directory</p>
+<p><strong>Key files</strong>:
+* <code class="docutils literal notranslate"><span class="pre">client/controllers/</span></code> - Robot controller logic
+* <code class="docutils literal notranslate"><span class="pre">client/loop_functions/</span></code> - Simulation orchestration</p>
+</section>
+<section id="action-dependency-graph-adg">
+<h3>Action Dependency Graph (ADG)<a class="headerlink" href="#action-dependency-graph-adg" title="Link to this heading"></a></h3>
+<p>The ADG monitors plan execution and handles uncertainties:</p>
+<ul class="simple">
+<li><p><strong>Plan Parser</strong> - Converts paths to action sequences</p></li>
+<li><p><strong>Graph Builder</strong> - Creates dependency graph from actions</p></li>
+<li><p><strong>Execution Monitor</strong> - Tracks progress and detects issues</p></li>
+<li><p><strong>Coordination</strong> - Manages agent interactions</p></li>
+</ul>
+<p><strong>Location</strong>: <code class="docutils literal notranslate"><span class="pre">server/</span></code> directory</p>
+<p><strong>Key files</strong>:
+* <code class="docutils literal notranslate"><span class="pre">server/inc/parser.h</span></code> - Path parsing
+* <code class="docutils literal notranslate"><span class="pre">server/src/ADG_server.cpp</span></code> - Main server logic</p>
+</section>
+<section id="rpc-communication">
+<h3>RPC Communication<a class="headerlink" href="#rpc-communication" title="Link to this heading"></a></h3>
+<p>Uses <a class="reference external" href="https://github.com/rpclib/rpclib">rpclib</a> for client-server communication:</p>
+<ul class="simple">
+<li><p><strong>Protocol</strong> - MessagePack over TCP</p></li>
+<li><p><strong>Port</strong> - Default 8182 (configurable)</p></li>
+<li><p><strong>Methods</strong> - Load scenario, set paths, run simulation, get stats</p></li>
+</ul>
+<p><strong>Key RPC calls</strong>:
+* <code class="docutils literal notranslate"><span class="pre">load_scenario(map,</span> <span class="pre">scen,</span> <span class="pre">agents)</span></code>
+* <code class="docutils literal notranslate"><span class="pre">set_paths(paths_json)</span></code>
+* <code class="docutils literal notranslate"><span class="pre">run_simulation(headless)</span></code>
+* <code class="docutils literal notranslate"><span class="pre">get_statistics()</span></code></p>
+</section>
+<section id="python-client">
+<h3>Python Client<a class="headerlink" href="#python-client" title="Link to this heading"></a></h3>
+<p>High-level Python API and CLI tools:</p>
+<ul class="simple">
+<li><p><strong>CLI</strong> - <code class="docutils literal notranslate"><span class="pre">run_sim.py</span></code> command-line interface</p></li>
+<li><p><strong>API</strong> - <code class="docutils literal notranslate"><span class="pre">SMARTClient</span></code> class for programmatic access</p></li>
+<li><p><strong>Utilities</strong> - Path conversion, visualization, analysis</p></li>
+</ul>
+<p><strong>Location</strong>: Root directory</p>
+<p><strong>Key files</strong>:
+* <code class="docutils literal notranslate"><span class="pre">run_sim.py</span></code> - Main CLI entry point
+* <code class="docutils literal notranslate"><span class="pre">ArgosConfig/ToArgos.py</span></code> - Configuration generation</p>
+</section>
+</section>
+<section id="execution-flow">
+<h2>Execution Flow<a class="headerlink" href="#execution-flow" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Initialization</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>User → run_sim.py → Start ADG_server → Connect RPC
+</pre></div>
+</div>
+</li>
+<li><p><strong>Load Scenario</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Load .map → Load .scen → Generate ARGoS config → Initialize robots
+</pre></div>
+</div>
+</li>
+<li><p><strong>Set Paths</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MAPF paths → Parse to actions → Build ADG → Validate
+</pre></div>
+</div>
+</li>
+<li><p><strong>Simulation</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ARGoS tick → Update robot states → Check ADG →
+Detect delays/collisions → Log events
+</pre></div>
+</div>
+</li>
+<li><p><strong>Results</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Simulation complete → Aggregate stats → Return to client
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="data-flow">
+<h2>Data Flow<a class="headerlink" href="#data-flow" title="Link to this heading"></a></h2>
+<p><strong>Path Input</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MAPF Planner
+   ↓
+paths.txt (discrete waypoints)
+   ↓
+Python client (validation)
+   ↓
+RPC (JSON serialization)
+   ↓
+ADG Server (parse to actions)
+   ↓
+ARGoS (continuous execution)
+</pre></div>
+</div>
+<p><strong>Statistics Output</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ARGoS (execution events)
+   ↓
+ADG (aggregation)
+   ↓
+RPC (JSON response)
+   ↓
+Python client
+   ↓
+CSV file / Python dict
+</pre></div>
+</div>
+</section>
+<section id="design-principles">
+<h2>Design Principles<a class="headerlink" href="#design-principles" title="Link to this heading"></a></h2>
+<p><strong>Modularity</strong></p>
+<p>Each component has a well-defined interface:</p>
+<ul class="simple">
+<li><p>Planner-agnostic: works with any MAPF algorithm</p></li>
+<li><p>Swappable simulator: ARGoS can be replaced</p></li>
+<li><p>Extensible: easy to add new metrics or features</p></li>
+</ul>
+<p><strong>Scalability</strong></p>
+<p>Designed for large numbers of agents:</p>
+<ul class="simple">
+<li><p>Efficient ADG representation</p></li>
+<li><p>Spatial hashing for collision detection</p></li>
+<li><p>Parallel simulation (when using ARGoS parallelization)</p></li>
+</ul>
+<p><strong>Realism</strong></p>
+<p>Bridges planning and reality:</p>
+<ul class="simple">
+<li><p>Physics-based dynamics</p></li>
+<li><p>Execution uncertainty</p></li>
+<li><p>Communication delays</p></li>
+<li><p>Sensor noise (configurable)</p></li>
+</ul>
+</section>
+<section id="code-structure">
+<h2>Code Structure<a class="headerlink" href="#code-structure" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>smart/
+├── client/              # ARGoS components
+│   ├── controllers/     # Robot controllers
+│   ├── loop_functions/  # Simulation logic
+│   └── embedding/       # Utilities
+├── server/              # ADG server
+│   ├── inc/             # Headers
+│   └── src/             # Implementation
+├── ArgosConfig/         # Config generation
+├── build/               # Build outputs
+├── docs/                # Documentation
+├── tests/               # Unit tests
+├── run_sim.py           # Main CLI
+└── CMakeLists.txt       # Build config
+</pre></div>
+</div>
+</section>
+<section id="build-system">
+<h2>Build System<a class="headerlink" href="#build-system" title="Link to this heading"></a></h2>
+<p>SMART uses CMake for building:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># Top-level CMakeLists.txt structure</span>
+<span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.16</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">Lifelong_SMART</span><span class="p">)</span>
+
+<span class="c"># Build options</span>
+<span class="nb">option</span><span class="p">(</span><span class="s">BUILD_SERVER</span><span class="w"> </span><span class="s2">&quot;Build ADG server&quot;</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+<span class="nb">option</span><span class="p">(</span><span class="s">BUILD_CLIENT</span><span class="w"> </span><span class="s2">&quot;Build ARGoS client&quot;</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+
+<span class="c"># Dependencies</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">Boost</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">ARGoS</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+
+<span class="c"># Subdirectories</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">server</span><span class="p">)</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">client</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="threading-model">
+<h2>Threading Model<a class="headerlink" href="#threading-model" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Main Thread</strong> - ARGoS simulation loop</p></li>
+<li><p><strong>RPC Thread</strong> - Handles client requests</p></li>
+<li><p><strong>Worker Threads</strong> - Physics computations (ARGoS internal)</p></li>
+</ul>
+<p>Thread safety is ensured through:
+* Mutex locks on shared state
+* Message queues for commands
+* Atomic operations for statistics</p>
+</section>
+<section id="performance-considerations">
+<h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading"></a></h2>
+<p><strong>Bottlenecks</strong>:</p>
+<ol class="arabic simple">
+<li><p>Physics simulation (ARGoS)</p></li>
+<li><p>Collision detection</p></li>
+<li><p>RPC serialization (for large path sets)</p></li>
+</ol>
+<p><strong>Optimizations</strong>:</p>
+<ul class="simple">
+<li><p>Spatial hashing for O(1) neighbor queries</p></li>
+<li><p>Lazy ADG evaluation</p></li>
+<li><p>Batch RPC calls</p></li>
+<li><p>Compiled with -O3 optimization</p></li>
+</ul>
+<p><strong>Scaling</strong>:</p>
+<ul class="simple">
+<li><p>~100 agents: Real-time with visualization</p></li>
+<li><p>~1000 agents: Real-time headless</p></li>
+<li><p>1000+ agents: Use time-scaling or distributed simulation</p></li>
+</ul>
+</section>
+<section id="extending-smart">
+<h2>Extending SMART<a class="headerlink" href="#extending-smart" title="Link to this heading"></a></h2>
+<p><strong>Add a new metric</strong>:</p>
+<ol class="arabic simple">
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">server/src/ADG_server.cpp</span></code> to track the metric</p></li>
+<li><p>Update statistics struct</p></li>
+<li><p>Return via RPC</p></li>
+<li><p>Parse in Python client</p></li>
+</ol>
+<p><strong>Add a new robot model</strong>:</p>
+<ol class="arabic simple">
+<li><p>Create controller in <code class="docutils literal notranslate"><span class="pre">client/controllers/</span></code></p></li>
+<li><p>Register in <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code></p></li>
+<li><p>Update ARGoS config generation</p></li>
+<li><p>Add Python API wrapper</p></li>
+</ol>
+<p><strong>Add a new sensor</strong>:</p>
+<ol class="arabic simple">
+<li><p>Implement sensor in ARGoS controller</p></li>
+<li><p>Expose data via RPC</p></li>
+<li><p>Add Python API method</p></li>
+</ol>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.argos-sim.info/documentation.php">ARGoS Documentation</a></p></li>
+<li><p><a class="reference external" href="https://github.com/rpclib/rpclib">rpclib Documentation</a></p></li>
+<li><p><span class="xref std std-doc">../contributing</span> - Contributing guide</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="settings.html" class="btn btn-neutral float-left" title="Settings and Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="paper.html" class="btn btn-neutral float-right" title="Paper and citation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jingtian Yan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

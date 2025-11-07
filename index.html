@@ -6,17 +6,23 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SMART-Docs documentation &mdash; SMART-Docs 1.0 documentation</title>
+  <title>Welcome to SMART &mdash; SMART 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=f2a433a1"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/debug.js?v=6b900b64"></script>
     <script src="_static/js/theme.js"></script>
+    <script src="_static/js/versions.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Overview" href="smart/overview.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -27,9 +33,13 @@
 
           
           
-          <a href="#" class="icon icon-home">
-            SMART-Docs
+          <a href="#">
+            
           </a>
+              <div class="switch-menus">
+                <div class="version-switch"></div>
+                <div class="language-switch"></div>
+              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -38,18 +48,40 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">SMART-Docs documentation</a></li>
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="smart/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart/build_linux.html">Build on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart/build_macos.html">Build on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart/running.html">Running SMART</a></li>
 </ul>
-</div>
+<p class="caption" role="heading"><span class="caption-text">Using SMART</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="smart/usage.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart/apis.html">Core APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart/planner_integration.html">Planner Integration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="smart/settings.html">Settings and Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart/architecture.html">Architecture</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="smart/paper.html">Paper and citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart/faq.html">FAQ - Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart/who_is_using.html">Who is Using SMART?</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">SMART-Docs</a>
+          <a href="#">SMART</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -57,7 +89,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">SMART-Docs documentation</li>
+      <li class="breadcrumb-item active">Welcome to SMART</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -67,19 +99,107 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="smart-docs-documentation">
-<h1>SMART-Docs documentation<a class="headerlink" href="#smart-docs-documentation" title="Link to this heading">¶</a></h1>
-<p>Add your content using <code class="docutils literal notranslate"><span class="pre">reStructuredText</span></code> syntax. See the
-<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a>
-documentation for details.</p>
+  <section id="welcome-to-smart">
+<h1>Welcome to SMART<a class="headerlink" href="#welcome-to-smart" title="Link to this heading"></a></h1>
+<p>SMART is a simulator for multi-agent path finding, built on <a class="reference external" href="https://www.argos-sim.info/">ARGoS</a>.
+It is open-source, cross platform, and supports realistic physics-based simulation
+for evaluating MAPF algorithms with hundreds to thousands of agents.</p>
+<p>Our goal is to develop SMART as a platform for MAPF research to bridge the gap
+between algorithmic planning and real-world deployment. For this purpose, SMART
+exposes APIs to integrate various MAPF planners and retrieve execution statistics.</p>
+<p><strong>Video Demo</strong></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id"
+frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+gyroscope; picture-in-picture" allowfullscreen></iframe><p><em>(Replace with actual SMART demo video when available)</em></p>
+<section id="how-to-get-it">
+<h2>How to Get It<a class="headerlink" href="#how-to-get-it" title="Link to this heading"></a></h2>
+<p><strong>Download</strong></p>
+<ul class="simple">
+<li><p>Download the latest release from <a class="reference external" href="https://github.com/smart-mapf/smart/releases">GitHub Releases</a></p></li>
+</ul>
+<p><strong>Build from Source</strong></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="smart/build_linux.html"><span class="doc">Build on Linux</span></a> - Build on Ubuntu/Linux</p></li>
+<li><p><a class="reference internal" href="smart/build_macos.html"><span class="doc">Build on macOS</span></a> - Build on macOS</p></li>
+<li><p><a class="reference internal" href="smart/installation.html"><span class="doc">Installation</span></a> - General installation guide</p></li>
+</ul>
+</section>
+<section id="how-to-use-it">
+<h2>How to Use It<a class="headerlink" href="#how-to-use-it" title="Link to this heading"></a></h2>
+<p><strong>Quick Start</strong></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="smart/running.html"><span class="doc">Running SMART</span></a> - Run your first simulation</p></li>
+<li><p><a class="reference internal" href="smart/usage.html"><span class="doc">Usage Guide</span></a> - Detailed usage guide</p></li>
+<li><p><a class="reference internal" href="smart/examples.html"><span class="doc">Examples</span></a> - Example scenarios</p></li>
+</ul>
+<p><strong>APIs</strong></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="smart/apis.html"><span class="doc">Core APIs</span></a> - Core Python APIs</p></li>
+<li><p><a class="reference internal" href="smart/planner_integration.html"><span class="doc">Planner Integration</span></a> - Integrate your MAPF planner</p></li>
+</ul>
+</section>
+<section id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="smart/examples.html"><span class="doc">Examples</span></a> - Getting started examples</p></li>
+<li><p><a class="reference internal" href="smart/paper.html"><span class="doc">Paper and citation</span></a> - Research paper and benchmarks</p></li>
+</ul>
+</section>
+<section id="participate">
+<h2>Participate<a class="headerlink" href="#participate" title="Link to this heading"></a></h2>
+<p><strong>Paper</strong></p>
+<p>More technical details are available in the <a class="reference external" href="https://arxiv.org/abs/2503.04798">SMART paper (arXiv:2503.04798)</a>.</p>
+<p>Please cite this as:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">yan2025smart</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{Advancing MAPF towards the Real World: A Scalable Multi-Agent Realistic Testbed (SMART)}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Yan, Jingtian and Li, Zhifei and Kang, William and Zheng, Kevin and Zhang, Yulun and Chen, Zhe and Zhang, Yue and Harabor, Daniel and Smith, Stephen F and Li, Jiaoyang}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="p">=</span><span class="s">{arXiv preprint arXiv:2503.04798}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2025}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Contribute</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/smart-mapf/smart">GitHub Repository</a></p></li>
+<li><p><a class="reference external" href="https://github.com/smart-mapf/smart/issues">Issue Tracker</a></p></li>
+</ul>
+<p><strong>Who is Using SMART?</strong></p>
+<p>See <a class="reference internal" href="smart/who_is_using.html"><span class="doc">Who is Using SMART?</span></a> for projects and research using SMART.</p>
+</section>
+<section id="what-s-new">
+<h2>What’s New<a class="headerlink" href="#what-s-new" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Initial release with ARGoS-based simulation</p></li>
+<li><p>Support for 100+ agents</p></li>
+<li><p>Action Dependency Graph execution monitoring</p></li>
+<li><p>Python API for planner integration</p></li>
+</ul>
+</section>
+<section id="faq">
+<h2>FAQ<a class="headerlink" href="#faq" title="Link to this heading"></a></h2>
+<p>If you run into problems, check the <a class="reference internal" href="smart/faq.html"><span class="doc">FAQ - Frequently Asked Questions</span></a>.</p>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading"></a></h2>
+<p>This project is released under the MIT License.</p>
+<p>Copyright © 2025 Carnegie Mellon University</p>
 <div class="toctree-wrapper compound">
 </div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="smart/overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

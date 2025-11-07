@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Core APIs &mdash; SMART 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/debug.js?v=6b900b64"></script>
+    <script src="../_static/js/theme.js"></script>
+    <script src="../_static/js/versions.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Planner Integration" href="planner_integration.html" />
+    <link rel="prev" title="Examples" href="examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+          </a>
+              <div class="switch-menus">
+                <div class="version-switch"></div>
+                <div class="language-switch"></div>
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_linux.html">Build on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_macos.html">Build on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">Running SMART</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using SMART</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Core APIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#client-server-architecture">Client-Server Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-api-reference">Python API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#path-format">Path Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#statistics-output">Statistics Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-api">Configuration API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#event-callbacks">Event Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rpc-protocol">RPC Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-scripts">Example Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="planner_integration.html">Planner Integration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings and Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="paper.html">Paper and citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ - Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="who_is_using.html">Who is Using SMART?</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SMART</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Core APIs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/smart/apis.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="core-apis">
+<h1>Core APIs<a class="headerlink" href="#core-apis" title="Link to this heading"></a></h1>
+<p>SMART provides Python APIs for interacting with the simulator and integrating
+MAPF planners.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The SMART APIs allow you to:</p>
+<ul class="simple">
+<li><p>Start and control simulations programmatically</p></li>
+<li><p>Integrate custom MAPF planners</p></li>
+<li><p>Retrieve real-time execution statistics</p></li>
+<li><p>Monitor agent states and positions</p></li>
+</ul>
+</section>
+<section id="client-server-architecture">
+<h2>Client-Server Architecture<a class="headerlink" href="#client-server-architecture" title="Link to this heading"></a></h2>
+<p>SMART uses an RPC-based client-server architecture:</p>
+<ul class="simple">
+<li><p><strong>Server</strong> - C++ ARGoS-based simulator (<code class="docutils literal notranslate"><span class="pre">ADG_server</span></code>)</p></li>
+<li><p><strong>Client</strong> - Python scripts communicate via RPC</p></li>
+<li><p><strong>Port</strong> - Default 8182 (configurable)</p></li>
+</ul>
+</section>
+<section id="python-api-reference">
+<h2>Python API Reference<a class="headerlink" href="#python-api-reference" title="Link to this heading"></a></h2>
+<p><strong>Basic Usage</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">smart_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMARTClient</span>
+
+<span class="c1"># Connect to SMART server</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">SMARTClient</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">8182</span><span class="p">)</span>
+
+<span class="c1"># Load simulation</span>
+<span class="n">client</span><span class="o">.</span><span class="n">load_simulation</span><span class="p">(</span>
+    <span class="n">map_file</span><span class="o">=</span><span class="s2">&quot;random-32-32-20.map&quot;</span><span class="p">,</span>
+    <span class="n">scenario_file</span><span class="o">=</span><span class="s2">&quot;random-32-32-20-random-1.scen&quot;</span><span class="p">,</span>
+    <span class="n">num_agents</span><span class="o">=</span><span class="mi">50</span>
+<span class="p">)</span>
+
+<span class="c1"># Set paths from your planner</span>
+<span class="n">client</span><span class="o">.</span><span class="n">set_paths</span><span class="p">(</span><span class="n">agent_paths</span><span class="p">)</span>
+
+<span class="c1"># Run simulation</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Get results</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Makespan: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;makespan&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Throughput: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;throughput&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>SMARTClient Class</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SMARTClient</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main client interface for SMART simulator.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8182</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize client connection.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            host: Server hostname</span>
+<span class="sd">            port: Server port number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_simulation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">map_file</span><span class="p">,</span> <span class="n">scenario_file</span><span class="p">,</span> <span class="n">num_agents</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load a simulation scenario.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            map_file: Path to .map file</span>
+<span class="sd">            scenario_file: Path to .scen file</span>
+<span class="sd">            num_agents: Number of agents</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">paths</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set planned paths for agents.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            paths: List of paths, one per agent</span>
+<span class="sd">                  Format: [[(x,y,t), (x,y,t), ...], ...]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headless</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute the simulation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            headless: Run without visualization</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Statistics including makespan, costs, delays</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_agent_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get current state of an agent.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            agent_id: Agent identifier</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Position, velocity, status</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">pause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Pause the simulation.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">resume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resume the simulation.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop and cleanup the simulation.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="path-format">
+<h2>Path Format<a class="headerlink" href="#path-format" title="Link to this heading"></a></h2>
+<p>Paths should be provided as a list of waypoint tuples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Single agent path</span>
+<span class="n">path</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>   <span class="c1"># (x, y, timestep)</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="c1"># ... goal</span>
+<span class="p">]</span>
+
+<span class="c1"># Multiple agents</span>
+<span class="n">all_paths</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[(</span><span class="mi">5</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="o">...</span><span class="p">],</span>  <span class="c1"># Agent 0</span>
+    <span class="p">[(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="o">...</span><span class="p">],</span>  <span class="c1"># Agent 1</span>
+    <span class="c1"># ...</span>
+<span class="p">]</span>
+
+<span class="n">client</span><span class="o">.</span><span class="n">set_paths</span><span class="p">(</span><span class="n">all_paths</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="statistics-output">
+<h2>Statistics Output<a class="headerlink" href="#statistics-output" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">run()</span></code> method returns a dictionary with execution statistics:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Access statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Makespan: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;makespan&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sum of costs: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;sum_of_costs&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Throughput: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;throughput&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success rate: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;success_rate&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Per-agent statistics</span>
+<span class="k">for</span> <span class="n">agent_id</span><span class="p">,</span> <span class="n">agent_stats</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;agents&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Agent </span><span class="si">{</span><span class="n">agent_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">agent_stats</span><span class="p">[</span><span class="s1">&#39;delays&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> delays&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Return format:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;makespan&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>           <span class="c1"># Maximum completion time</span>
+    <span class="s1">&#39;sum_of_costs&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>       <span class="c1"># Total path costs</span>
+    <span class="s1">&#39;throughput&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>       <span class="c1"># Agents/second</span>
+    <span class="s1">&#39;success_rate&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>     <span class="c1"># Fraction reaching goal</span>
+    <span class="s1">&#39;agents&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;makespan&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="s1">&#39;cost&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="s1">&#39;delays&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="s1">&#39;collisions&#39;</span><span class="p">:</span> <span class="nb">int</span>
+        <span class="p">},</span>
+        <span class="c1"># ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="configuration-api">
+<h2>Configuration API<a class="headerlink" href="#configuration-api" title="Link to this heading"></a></h2>
+<p>Customize simulation parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">set_config</span><span class="p">({</span>
+    <span class="s1">&#39;robot_radius&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>        <span class="c1"># Robot size (meters)</span>
+    <span class="s1">&#39;max_velocity&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>        <span class="c1"># Max speed (m/s)</span>
+    <span class="s1">&#39;time_limit&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>         <span class="c1"># Simulation time limit</span>
+    <span class="s1">&#39;collision_threshold&#39;</span><span class="p">:</span> <span class="mf">0.1</span>  <span class="c1"># Collision distance</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</section>
+<section id="event-callbacks">
+<h2>Event Callbacks<a class="headerlink" href="#event-callbacks" title="Link to this heading"></a></h2>
+<p>Register callbacks for simulation events:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">on_collision</span><span class="p">(</span><span class="n">agent_a</span><span class="p">,</span> <span class="n">agent_b</span><span class="p">,</span> <span class="n">timestep</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collision: Agent </span><span class="si">{</span><span class="n">agent_a</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">agent_b</span><span class="si">}</span><span class="s2"> at t=</span><span class="si">{</span><span class="n">timestep</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">on_delay</span><span class="p">(</span><span class="n">agent_id</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">delay_time</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Agent </span><span class="si">{</span><span class="n">agent_id</span><span class="si">}</span><span class="s2"> delayed at </span><span class="si">{</span><span class="n">location</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">client</span><span class="o">.</span><span class="n">register_callback</span><span class="p">(</span><span class="s1">&#39;collision&#39;</span><span class="p">,</span> <span class="n">on_collision</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">register_callback</span><span class="p">(</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span> <span class="n">on_delay</span><span class="p">)</span>
+
+<span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="rpc-protocol">
+<h2>RPC Protocol<a class="headerlink" href="#rpc-protocol" title="Link to this heading"></a></h2>
+<p>For advanced users implementing custom clients, SMART uses rpclib with the
+following RPC methods:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">load_scenario(map,</span> <span class="pre">scen,</span> <span class="pre">num_agents)</span></code> - Load simulation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set_agent_paths(paths_json)</span></code> - Set paths</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_simulation(headless)</span></code> - Execute</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_statistics()</span></code> - Retrieve results</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pause_simulation()</span></code> - Pause</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resume_simulation()</span></code> - Resume</p></li>
+</ul>
+<p>See the <a class="reference external" href="https://github.com/rpclib/rpclib">rpclib documentation</a> for details.</p>
+</section>
+<section id="example-scripts">
+<h2>Example Scripts<a class="headerlink" href="#example-scripts" title="Link to this heading"></a></h2>
+<p>Complete examples are available in the repository:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">examples/simple_client.py</span></code> - Basic API usage</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">examples/batch_experiment.py</span></code> - Run multiple scenarios</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">examples/custom_planner.py</span></code> - Integrate a MAPF planner</p></li>
+</ul>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="planner_integration.html"><span class="doc">Planner Integration</span></a> - Integrate your MAPF algorithm</p></li>
+<li><p><a class="reference internal" href="examples.html"><span class="doc">Examples</span></a> - Complete examples</p></li>
+<li><p><a class="reference internal" href="usage.html"><span class="doc">Usage Guide</span></a> - Command-line usage</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="planner_integration.html" class="btn btn-neutral float-right" title="Planner Integration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jingtian Yan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

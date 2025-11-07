@@ -1,0 +1,337 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage Guide &mdash; SMART 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/debug.js?v=6b900b64"></script>
+    <script src="../_static/js/theme.js"></script>
+    <script src="../_static/js/versions.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples" href="examples.html" />
+    <link rel="prev" title="Running SMART" href="running.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+          </a>
+              <div class="switch-menus">
+                <div class="version-switch"></div>
+                <div class="language-switch"></div>
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_linux.html">Build on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_macos.html">Build on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">Running SMART</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using SMART</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-workflow">Basic Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-interface">Command Line Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualization-mode">Visualization Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#headless-mode">Headless Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#path-file-format">Path File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coordinate-systems">Coordinate Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-statistics">Output Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-files">Configuration Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#map-and-scenario-files">Map and Scenario Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apis.html">Core APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="planner_integration.html">Planner Integration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings and Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="paper.html">Paper and citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ - Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="who_is_using.html">Who is Using SMART?</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SMART</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Usage Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/smart/usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usage-guide">
+<h1>Usage Guide<a class="headerlink" href="#usage-guide" title="Link to this heading"></a></h1>
+<p>This guide provides detailed information on using SMART for MAPF research and experiments.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>SMART provides a complete pipeline for evaluating MAPF algorithms:</p>
+<ol class="arabic simple">
+<li><p><strong>Plan generation</strong> - Your MAPF algorithm generates paths</p></li>
+<li><p><strong>Simulation</strong> - ARGoS simulates realistic robot execution</p></li>
+<li><p><strong>Monitoring</strong> - Action Dependency Graph tracks execution</p></li>
+<li><p><strong>Analysis</strong> - Collect statistics on throughput, delays, collisions</p></li>
+</ol>
+</section>
+<section id="basic-workflow">
+<h2>Basic Workflow<a class="headerlink" href="#basic-workflow" title="Link to this heading"></a></h2>
+<p>The typical SMART workflow consists of:</p>
+<ol class="arabic simple">
+<li><p>Prepare a map file (<cite>.map</cite> format)</p></li>
+<li><p>Create a scenario file (<cite>.scen</cite> format) with start/goal positions</p></li>
+<li><p>Run your MAPF planner to generate paths</p></li>
+<li><p>Execute the simulation with SMART</p></li>
+<li><p>Analyze the results</p></li>
+</ol>
+</section>
+<section id="command-line-interface">
+<h2>Command Line Interface<a class="headerlink" href="#command-line-interface" title="Link to this heading"></a></h2>
+<p>The main entry point is <code class="docutils literal notranslate"><span class="pre">run_sim.py</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>run_sim.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--map_name<span class="o">=</span>random-32-32-20.map<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--scen_name<span class="o">=</span>random-32-32-20-random-1.scen<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num_agents<span class="o">=</span><span class="m">50</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--path_filename<span class="o">=</span>paths.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--flip_coord<span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+<p><strong>Key Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--map_name</span></code> - Map file to use (<cite>.map</cite> format)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--scen_name</span></code> - Scenario file with start/goal positions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--num_agents</span></code> - Number of agents to simulate</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--path_filename</span></code> - Input path file from your planner</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--flip_coord</span></code> - Coordinate system (0=xy, 1=yx)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--headless</span></code> - Run without visualization (default: False)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--port_num</span></code> - RPC port number (default: 8182)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--stats_name</span></code> - Output statistics CSV file</p></li>
+</ul>
+</section>
+<section id="visualization-mode">
+<h2>Visualization Mode<a class="headerlink" href="#visualization-mode" title="Link to this heading"></a></h2>
+<p>Run with visualization to observe the simulation in real-time:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>run_sim.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--map_name<span class="o">=</span>empty-32-32.map<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--scen_name<span class="o">=</span>empty-32-32-random-1.scen<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num_agents<span class="o">=</span><span class="m">20</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--path_filename<span class="o">=</span>my_paths.txt
+</pre></div>
+</div>
+<p>The ARGoS visualizer will open showing:</p>
+<ul class="simple">
+<li><p>Robot movements in real-time</p></li>
+<li><p>Collision detection</p></li>
+<li><p>Path following behavior</p></li>
+</ul>
+<p><strong>Controls:</strong></p>
+<ul class="simple">
+<li><p>Mouse - Rotate camera</p></li>
+<li><p>Arrow keys - Move camera</p></li>
+<li><p>Spacebar - Pause/resume</p></li>
+<li><p>F10 - Toggle fast forward</p></li>
+</ul>
+</section>
+<section id="headless-mode">
+<h2>Headless Mode<a class="headerlink" href="#headless-mode" title="Link to this heading"></a></h2>
+<p>For batch experiments and benchmarking, run in headless mode:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>run_sim.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--map_name<span class="o">=</span>random-64-64-20.map<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--scen_name<span class="o">=</span>random-64-64-20-random-1.scen<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num_agents<span class="o">=</span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--path_filename<span class="o">=</span>paths.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--headless<span class="o">=</span>True<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--stats_name<span class="o">=</span>experiment_1.csv
+</pre></div>
+</div>
+<p>Headless mode:</p>
+<ul class="simple">
+<li><p>Runs faster (no rendering overhead)</p></li>
+<li><p>Suitable for automated experiments</p></li>
+<li><p>Outputs statistics to CSV</p></li>
+</ul>
+</section>
+<section id="path-file-format">
+<h2>Path File Format<a class="headerlink" href="#path-file-format" title="Link to this heading"></a></h2>
+<p>The path file contains trajectories for each agent:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Agent 0:(5,16,0)-&gt;(5,17,1)-&gt;(5,18,2)-&gt;(6,18,3)-&gt;...
+Agent 1:(10,5,0)-&gt;(11,5,1)-&gt;(12,5,2)-&gt;...
+</pre></div>
+</div>
+<p>Format: <code class="docutils literal notranslate"><span class="pre">Agent</span> <span class="pre">ID:(x,y,t)-&gt;(x,y,t)-&gt;...</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(x,y,t)</span></code> - Position (x, y) at timestep t</p></li>
+<li><p>Paths should be collision-free in discrete time</p></li>
+<li><p>SMART adds realistic execution uncertainty</p></li>
+</ul>
+</section>
+<section id="coordinate-systems">
+<h2>Coordinate Systems<a class="headerlink" href="#coordinate-systems" title="Link to this heading"></a></h2>
+<p>SMART supports two coordinate conventions:</p>
+<p><strong>XY format</strong> (<code class="docutils literal notranslate"><span class="pre">--flip_coord=0</span></code>):</p>
+<ul class="simple">
+<li><p>Standard (x, y) coordinates</p></li>
+<li><p>x increases rightward, y increases upward</p></li>
+</ul>
+<p><strong>YX format</strong> (<code class="docutils literal notranslate"><span class="pre">--flip_coord=1</span></code>):</p>
+<ul class="simple">
+<li><p>Used by some MAPF planners</p></li>
+<li><p>Row-column format</p></li>
+<li><p>Automatically converted internally</p></li>
+</ul>
+</section>
+<section id="output-statistics">
+<h2>Output Statistics<a class="headerlink" href="#output-statistics" title="Link to this heading"></a></h2>
+<p>SMART generates a CSV file with execution statistics:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>agent_id,makespan,sum_of_costs,num_delays,num_collisions
+0,45,45,2,0
+1,52,53,3,1
+...
+</pre></div>
+</div>
+<p><strong>Metrics:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">makespan</span></code> - Time to reach goal</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sum_of_costs</span></code> - Total path cost</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_delays</span></code> - Execution delays encountered</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_collisions</span></code> - Collision count</p></li>
+</ul>
+</section>
+<section id="configuration-files">
+<h2>Configuration Files<a class="headerlink" href="#configuration-files" title="Link to this heading"></a></h2>
+<p>ARGoS configuration is generated automatically. To customize:</p>
+<ol class="arabic simple">
+<li><p>Run once to generate <code class="docutils literal notranslate"><span class="pre">.argos</span></code> file</p></li>
+<li><p>Edit the configuration:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vim<span class="w"> </span>output.argos
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Run ARGoS directly:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>argos3<span class="w"> </span>-c<span class="w"> </span>output.argos
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="settings.html"><span class="doc">Settings and Configuration</span></a> for advanced configuration options.</p>
+</section>
+<section id="map-and-scenario-files">
+<h2>Map and Scenario Files<a class="headerlink" href="#map-and-scenario-files" title="Link to this heading"></a></h2>
+<p><strong>Map Format</strong> (<cite>.map</cite> extension):</p>
+<p>MovingAI format used by MAPF benchmarks:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>type octile
+height 32
+width 32
+map
+@@@@@@@@...
+@......@...
+...
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;</span></code> - Obstacle</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.</span></code> - Free space</p></li>
+</ul>
+<p><strong>Scenario Format</strong> (<cite>.scen</cite> extension):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>version 1
+0 map.map 32 32 5 5 25 25 20.0
+1 map.map 32 32 10 10 20 20 10.0
+</pre></div>
+</div>
+<p>Format: <code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">map</span> <span class="pre">width</span> <span class="pre">height</span> <span class="pre">start_x</span> <span class="pre">start_y</span> <span class="pre">goal_x</span> <span class="pre">goal_y</span> <span class="pre">optimal_cost</span></code></p>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="examples.html"><span class="doc">Examples</span></a> - Walkthrough examples</p></li>
+<li><p><a class="reference internal" href="apis.html"><span class="doc">Core APIs</span></a> - Python API reference</p></li>
+<li><p><a class="reference internal" href="planner_integration.html"><span class="doc">Planner Integration</span></a> - Integrate your planner</p></li>
+<li><p><a class="reference internal" href="settings.html"><span class="doc">Settings and Configuration</span></a> - Advanced configuration</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="running.html" class="btn btn-neutral float-left" title="Running SMART" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jingtian Yan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
