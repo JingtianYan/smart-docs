@@ -75,8 +75,10 @@ html_context = {
     'versions': [],  # Empty list to hide version dropdown
 }
 
+html_static_path = ['_static/']
+html_css_files = ['custom.css']
+
 if not 'READTHEDOCS' in os.environ:
-    html_static_path = ['_static/']
     html_js_files = ['debug.js']
     html_context["DEBUG"] = True
 

@@ -1,0 +1,19 @@
+/* Hide the version selector dropdown arrow */
+.rst-versions .rst-current-version .fa-caret-down {
+    display: none !important;
+}
+
+/* Make the version display non-clickable */
+.rst-versions .rst-current-version {
+    cursor: default !important;
+}
+
+/* Hide the version dropdown menu completely */
+.rst-versions .rst-other-versions {
+    display: none !important;
+}
+
+/* Prevent the version area from being clickable */
+.rst-versions[data-toggle="rst-versions"] {
+    pointer-events: none;
+}
