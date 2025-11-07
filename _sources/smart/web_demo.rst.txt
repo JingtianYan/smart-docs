@@ -366,19 +366,6 @@ After exploring the web demo:
 * Visit https://github.com/smart-mapf/smart for documentation
 * Open an issue on GitHub for bugs or feature requests
 
-Video Walkthrough
------------------
-
-For a guided video tutorial of the web demo, see:
-
-.. raw:: html
-
-   <iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id" 
-   frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
-   gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-*(Video tutorial coming soon)*
-
 Try It Now
 ----------
 

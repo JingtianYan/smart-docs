@@ -70,7 +70,6 @@
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#common-observations">Common Observations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#limitations">Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#next-steps">Next Steps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web_demo.html#video-walkthrough">Video Walkthrough</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#try-it-now">Try It Now</a></li>
 </ul>
 </li>
@@ -278,32 +277,9 @@ The integration process:</p>
 </section>
 <section id="planner-output-format">
 <h2>Planner Output Format<a class="headerlink" href="#planner-output-format" title="Link to this heading"></a></h2>
-<p>Your MAPF planner should output paths in one of these formats:</p>
-<p><strong>Option 1: SMART Native Format</strong></p>
+<p>Your MAPF planner should output paths in the following formats:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Agent 0:(5,16,0)-&gt;(5,17,1)-&gt;(5,18,2)-&gt;(6,18,3)-&gt;...
 Agent 1:(10,5,0)-&gt;(11,5,1)-&gt;(12,5,2)-&gt;...
-</pre></div>
-</div>
-<p><strong>Option 2: JSON Format</strong></p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;agents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[[</span><span class="mi">5</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">3</span><span class="p">]]</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[[</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">11</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><strong>Option 3: Python List</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">paths</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">[(</span><span class="mi">5</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>  <span class="c1"># Agent 0</span>
-    <span class="p">[(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span>   <span class="c1"># Agent 1</span>
-<span class="p">]</span>
 </pre></div>
 </div>
 </section>
