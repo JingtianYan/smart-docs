@@ -1,90 +1,138 @@
-Read the Docs Sphinx Theme
-==========================
+Welcome to SMART
+================
 
-This Sphinx_ theme was designed to provide a great reader experience for
-documentation users on both desktop and mobile devices. This theme is commonly
-used with projects on `Read the Docs`_ but can work with any Sphinx project.
+SMART is a simulator for multi-agent path finding, built on `ARGoS <https://www.argos-sim.info/>`_. 
+It is open-source, cross platform, and supports realistic physics-based simulation 
+for evaluating MAPF algorithms with hundreds to thousands of agents.
 
-.. _Sphinx: http://www.sphinx-doc.org
-.. _Read the Docs: http://www.readthedocs.org
+Our goal is to develop SMART as a platform for MAPF research to bridge the gap 
+between algorithmic planning and real-world deployment. For this purpose, SMART 
+exposes APIs to integrate various MAPF planners and retrieve execution statistics.
 
-Using this theme
-----------------
+**Video Demo**
 
-:doc:`installing`
-    How to install this theme on your Sphinx project.
+.. raw:: html
 
-:doc:`configuring`
-    Theme configuration and customization options.
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id" 
+   frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+   gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-:ref:`supported-browsers`
-    Supported browser/operating system combinations.
+*(Replace with actual SMART demo video when available)*
 
-:ref:`supported-dependencies`
-    Supported project dependencies, like Python and Sphinx.
+How to Get It
+-------------
 
-Development
+**Download**
+
+* Download the latest release from `GitHub Releases <https://github.com/smart-mapf/smart/releases>`_
+
+**Build from Source**
+
+* :doc:`smart/build_linux` - Build on Ubuntu/Linux
+* :doc:`smart/build_macos` - Build on macOS  
+* :doc:`smart/installation` - General installation guide
+
+How to Use It
+-------------
+
+**Quick Start**
+
+* :doc:`smart/running` - Run your first simulation
+* :doc:`smart/usage` - Detailed usage guide
+* :doc:`smart/examples` - Example scenarios
+
+**APIs**
+
+* :doc:`smart/apis` - Core Python APIs
+* :doc:`smart/planner_integration` - Integrate your MAPF planner
+
+Tutorials
+---------
+
+* :doc:`smart/examples` - Getting started examples
+* :doc:`smart/paper` - Research paper and benchmarks
+
+Participate
 -----------
 
-:doc:`contributing`
-    How to contribute changes to the theme.
+**Paper**
 
-:doc:`Development guidelines <development>`
-    Guidelines the theme developers use for developing and testing changes.
+More technical details are available in the `SMART paper (arXiv:2503.04798) <https://arxiv.org/abs/2503.04798>`_.
 
-`Read the Docs contributor guide`_
-    Our contribution guidelines extend to all projects maintained by Read the
-    Docs core team.
+Please cite this as:
 
-:doc:`changelog`
-    The theme development changelog.
+.. code-block:: bibtex
 
-:doc:`Demo documentation <demo/structure>`
-    The theme's styleguide test environment, where new changes are tested.
+   @article{yan2025smart,
+     title={Advancing MAPF towards the Real World: A Scalable Multi-Agent Realistic Testbed (SMART)},
+     author={Yan, Jingtian and Li, Zhifei and Kang, William and Zheng, Kevin and Zhang, Yulun and Chen, Zhe and Zhang, Yue and Harabor, Daniel and Smith, Stephen F and Li, Jiaoyang},
+     journal={arXiv preprint arXiv:2503.04798},
+     year={2025}
+   }
 
+**Contribute**
 
-.. _Read the Docs contributor guide: https://docs.readthedocs.io/en/stable/contribute.html
+* `GitHub Repository <https://github.com/smart-mapf/smart>`_
+* `Issue Tracker <https://github.com/smart-mapf/smart/issues>`_
 
+**Who is Using SMART?**
 
-.. Hidden TOCs
+See :doc:`smart/who_is_using` for projects and research using SMART.
+
+What's New
+----------
+
+* Initial release with ARGoS-based simulation
+* Support for 100+ agents
+* Action Dependency Graph execution monitoring
+* Python API for planner integration
+
+FAQ
+---
+
+If you run into problems, check the :doc:`smart/faq`.
+
+License
+-------
+
+This project is released under the MIT License.
+
+Copyright © 2025 Carnegie Mellon University
 
 .. toctree::
-   :caption: Theme Documentation
+   :hidden:
    :maxdepth: 2
-   :hidden:
+   :caption: Getting Started
 
-   installing
-   configuring
-   development
-   contributing
+   smart/overview
+   smart/installation
+   smart/build_linux
+   smart/build_macos
+   smart/running
 
 .. toctree::
+   :hidden:
+   :maxdepth: 2
+   :caption: Using SMART
+
+   smart/usage
+   smart/examples
+   smart/apis
+   smart/planner_integration
+
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+   :caption: Advanced
+
+   smart/settings
+   smart/architecture
+
+.. toctree::
+   :hidden:
    :maxdepth: 1
-   :hidden:
+   :caption: Resources
 
-   changelog
-
-.. toctree::
-    :maxdepth: 2
-    :numbered:
-    :caption: Demo Documentation
-    :hidden:
-
-    demo/structure
-    demo/demo
-    demo/lists_tables
-    demo/api
-
-.. toctree::
-    :maxdepth: 3
-    :numbered:
-    :caption: This is an incredibly long caption for a long menu
-    :hidden:
-
-    demo/long
-    
-.. toctree::
-    :maxdepth: 3
-    :caption: Breadcrumbs
-
-    demo/level1/index.rst
+   smart/paper
+   smart/faq
+   smart/who_is_using

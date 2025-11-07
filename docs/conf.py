@@ -13,12 +13,13 @@ from sphinx_rtd_theme import __version__ as theme_version
 from sphinx_rtd_theme import __version_full__ as theme_version_full
 from sphinx.locale import _
 
-project = u'Read the Docs Sphinx Theme'
+project = u'SMART'
 slug = re.sub(r'\W+', '-', project.lower())
-version = theme_version
-release = theme_version_full
-author = u'Dave Snider, Read the Docs, Inc. & contributors'
-copyright = author
+# Use a repo-specific version/release by default
+version = '1.0'
+release = '1.0'
+author = u'Jingtian Yan'
+copyright = u'2025, Jingtian Yan'
 language = 'en'
 
 extensions = [
@@ -32,7 +33,8 @@ extensions = [
 
 templates_path = ['_templates']
 source_suffix = '.rst'
-exclude_patterns = []
+# Exclude the theme demo and other non-SMART pages so the site shows only SMART
+exclude_patterns = ['demo/**', 'demo', 'changelog.rst', 'development.rst', 'contributing.rst', 'installing.rst', 'configuring.rst']
 locale_dirs = ['locale/']
 gettext_compact = False
 
@@ -63,7 +65,8 @@ if not 'READTHEDOCS' in os.environ:
     html_js_files = ['debug.js']
     html_context["DEBUG"] = True
 
-html_logo = "demo/static/logo-wordmark-light.svg"
+# Use project logo if available in _static; otherwise no logo is shown.
+html_logo = None
 html_show_sourcelink = True
 html_favicon = "demo/static/favicon.ico"
 
