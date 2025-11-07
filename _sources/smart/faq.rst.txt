@@ -9,10 +9,8 @@ Installation and Building
 A: SMART officially supports:
 
 * Ubuntu 20.04+ (recommended)
-* macOS 11+ (Big Sur and later)
-* Other Linux distributions with ARGoS support
 
-Windows is not currently supported for native builds. Consider using WSL2 or Docker.
+Windows is not currently supported for native builds. Consider using Docker.
 
 **Q: Build fails with linking errors**
 
