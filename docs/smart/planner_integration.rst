@@ -17,40 +17,14 @@ The integration process:
 Planner Output Format
 ---------------------
 
-Your MAPF planner should output paths in one of these formats:
-
-**Option 1: SMART Native Format**
+Your MAPF planner should output paths in the following formats:
 
 .. code-block:: text
 
    Agent 0:(5,16,0)->(5,17,1)->(5,18,2)->(6,18,3)->...
    Agent 1:(10,5,0)->(11,5,1)->(12,5,2)->...
 
-**Option 2: JSON Format**
 
-.. code-block:: json
-
-   {
-     "agents": [
-       {
-         "id": 0,
-         "path": [[5,16,0], [5,17,1], [5,18,2], [6,18,3]]
-       },
-       {
-         "id": 1,
-         "path": [[10,5,0], [11,5,1], [12,5,2]]
-       }
-     ]
-   }
-
-**Option 3: Python List**
-
-.. code-block:: python
-
-   paths = [
-       [(5,16,0), (5,17,1), (5,18,2)],  # Agent 0
-       [(10,5,0), (11,5,1), (12,5,2)]   # Agent 1
-   ]
 
 Integration Template
 --------------------

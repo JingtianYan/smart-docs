@@ -11,13 +11,7 @@ exposes APIs to integrate various MAPF planners and retrieve execution statistic
 
 **Video Demo**
 
-.. raw:: html
-
-   <iframe width="560" height="315" src="https://youtu.be/TX-oGSgM8VQ" 
-   frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
-   gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-.. *(Replace with actual SMART demo video when available)*
+Watch the SMART demonstration video on YouTube: `https://www.youtube.com/watch?v=TX-oGSgM8VQ <https://www.youtube.com/watch?v=TX-oGSgM8VQ>`_
 
 How to Get It
 -------------
@@ -30,9 +24,6 @@ How to Get It
 
 * :doc:`smart/build_linux` - Build on Ubuntu/Linux
 * :doc:`smart/installation` - General installation guide
-
-How to Use It
--------------
 
 How to Use It
 -------------
