@@ -33,14 +33,17 @@ module.exports = {
             loader: "css-loader"
           },
           {
-            loader: "sass-loader?indentedSyntax",
+            loader: "sass-loader",
             options: {
-              includePaths: [
-                "node_modules/bourbon/app/assets/stylesheets",
-                "node_modules/bourbon-neat/app/assets/stylesheets",
-                "node_modules/font-awesome/scss",
-                "node_modules/wyrm/sass"
-              ]
+              sassOptions: {
+                indentedSyntax: true,
+                includePaths: [
+                  "node_modules/bourbon/app/assets/stylesheets",
+                  "node_modules/bourbon-neat/app/assets/stylesheets",
+                  "node_modules/font-awesome/scss",
+                  "node_modules/wyrm/sass"
+                ]
+              }
             }
           }
         ]
