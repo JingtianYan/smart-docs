@@ -64,12 +64,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#playback-controls">Playback Controls</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#statistics-panel">Statistics Panel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#interactive-features">Interactive Features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scenario-details">Scenario Details</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#algorithm-comparison">Algorithm Comparison</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#export-and-share">Export and Share</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tips-for-best-experience">Tips for Best Experience</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#common-observations">Common Observations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#try-it-now">Try It Now</a></li>
 </ul>
@@ -288,71 +283,46 @@ where you can visualize multi-agent path finding in real-time without any instal
 <dl class="simple">
 <dt><strong>Visualization Area</strong></dt><dd><p>The central canvas showing:</p>
 <ul class="simple">
-<li><p>Grid-based map environment</p></li>
-<li><p>Robots as colored circles</p></li>
-<li><p>Planned paths (thin lines)</p></li>
-<li><p>Actual trajectories (thick lines)</p></li>
-<li><p>Obstacles (dark cells)</p></li>
+<li><p>Map environment</p></li>
+<li><p>Robots</p></li>
+<li><p>Obstacles (white cubes)</p></li>
 </ul>
 </dd>
 <dt><strong>Control Panel</strong></dt><dd><p>Located on the left side:</p>
 <ul class="simple">
+<li><p>Example scenario selection</p></li>
 <li><p>Scenario selection dropdown</p></li>
-<li><p>Algorithm selection</p></li>
 <li><p>Playback controls (play/pause/reset)</p></li>
 <li><p>Speed slider</p></li>
 <li><p>Statistics display</p></li>
-</ul>
-</dd>
-<dt><strong>Timeline</strong></dt><dd><p>Bottom bar showing:</p>
-<ul class="simple">
-<li><p>Current timestep</p></li>
-<li><p>Total simulation time</p></li>
-<li><p>Progress indicator</p></li>
 </ul>
 </dd>
 </dl>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
-<p><strong>Step 1: Select a Scenario</strong></p>
+<p><strong>Step 1: Select a Map and Plan</strong></p>
 <ol class="arabic simple">
-<li><p>Click the <strong>Scenario</strong> dropdown menu</p></li>
-<li><p>Choose from available options:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">random-32-32-20</span></code> - Random obstacles, 32×32 grid</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">maze-32-32-4</span></code> - Maze environment</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">empty-32-32</span></code> - Open space</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">warehouse-20-40</span></code> - Warehouse layout</p></li>
-</ul>
-</li>
-<li><p>Select the number of agents (e.g., 10, 20, 50, 100)</p></li>
+<li><p>At the <strong>Input</strong> menu</p></li>
+<li><p>Choose the map file from local disk</p></li>
+<li><p>Choose the scenario file from local disk (indicating start/goal positions)</p></li>
+<li><p>Choose the MAPF plan file from local disk (pre-computed solution)</p></li>
 </ol>
-<p><strong>Step 2: Choose an Algorithm</strong></p>
-<p>Select a MAPF algorithm from the dropdown:</p>
-<ul class="simple">
-<li><p><strong>CBS (Conflict-Based Search)</strong> - Optimal solver</p></li>
-<li><p><strong>EECBS</strong> - Enhanced CBS with bounded suboptimality</p></li>
-<li><p><strong>PBS (Priority-Based Search)</strong> - Priority-based approach</p></li>
-<li><p><strong>LaCAM</strong> - Lazy Constraints Addition MAPF</p></li>
-</ul>
-<p>Each algorithm has different performance characteristics in terms of solution quality
-and computation time.</p>
-<p><strong>Step 3: Load and Play</strong></p>
+<p><strong>Step 2: Load</strong></p>
 <ol class="arabic simple">
-<li><p>Click the <strong>Load</strong> button to initialize the scenario</p></li>
-<li><p>Wait for the simulation to load (progress bar appears)</p></li>
-<li><p>Click <strong>Play</strong> ▶ to start the simulation</p></li>
-<li><p>Use <strong>Pause</strong> ⏸ to stop temporarily</p></li>
-<li><p>Click <strong>Reset</strong> 🔄 to restart from the beginning</p></li>
+<li><p>At the <strong>Run</strong> menu</p></li>
+<li><p>Click <strong>Simulate</strong> ▶ to start the simulation</p></li>
+</ol>
+<p><strong>Step 3: Play</strong></p>
+<ol class="arabic simple">
+<li><p>At the <strong>Playback</strong> menu</p></li>
+<li><p>Toggle the <strong>Time</strong> and <strong>Playback speed</strong> buttons to control the simulation</p></li>
 </ol>
 </section>
 <section id="understanding-the-visualization">
 <h2>Understanding the Visualization<a class="headerlink" href="#understanding-the-visualization" title="Link to this heading"></a></h2>
 <p><strong>Robot Representation</strong></p>
 <ul class="simple">
-<li><p><strong>Colored circles</strong> - Individual robots/agents</p></li>
-<li><p><strong>Color coding</strong> - Each agent has a unique color</p></li>
 <li><p><strong>Size</strong> - Represents the robot’s physical footprint</p></li>
 <li><p><strong>Opacity</strong> - Faded robots have reached their goals</p></li>
 </ul>
@@ -365,11 +335,7 @@ and computation time.</p>
 </ul>
 <p><strong>Map Elements</strong></p>
 <ul class="simple">
-<li><p><strong>White/light cells</strong> - Free space (traversable)</p></li>
-<li><p><strong>Dark/black cells</strong> - Obstacles (impassable)</p></li>
-<li><p><strong>Grid lines</strong> - Cell boundaries</p></li>
-<li><p><strong>Start markers</strong> - Small circles at agent starting positions</p></li>
-<li><p><strong>Goal markers</strong> - Stars or crosses at goal positions</p></li>
+<li><p><strong>White cubes</strong> - Obstacles (impassable)</p></li>
 </ul>
 <p><strong>Execution Indicators</strong></p>
 <ul class="simple">
@@ -400,9 +366,6 @@ and computation time.</p>
 <ul class="simple">
 <li><p><strong>Mouse wheel</strong> - Zoom in/out</p></li>
 <li><p><strong>Click and drag</strong> - Pan the view</p></li>
-<li><p><strong>Double-click</strong> - Center on a specific agent</p></li>
-<li><p><strong>R key</strong> - Reset camera to default view</p></li>
-<li><p><strong>F key</strong> - Follow mode (camera tracks agents)</p></li>
 </ul>
 </section>
 <section id="statistics-panel">
@@ -442,74 +405,6 @@ and computation time.</p>
 <li><p>Statistics for selected agent appear in the side panel</p></li>
 <li><p>Press <strong>ESC</strong> to deselect</p></li>
 </ul>
-<p><strong>Path Comparison</strong></p>
-<p>Toggle between views:</p>
-<ul class="simple">
-<li><p><strong>Planned Paths</strong> - Show algorithm output</p></li>
-<li><p><strong>Executed Paths</strong> - Show actual trajectories</p></li>
-<li><p><strong>Both</strong> - Overlay for comparison (default)</p></li>
-<li><p><strong>None</strong> - Hide paths, show only robots</p></li>
-</ul>
-<p><strong>Heatmap Visualization</strong></p>
-<p>Enable heatmap mode to see:</p>
-<ul class="simple">
-<li><p><strong>Traffic density</strong> - Areas with high agent concentration</p></li>
-<li><p><strong>Delay hotspots</strong> - Locations where delays occur</p></li>
-<li><p><strong>Collision points</strong> - Where conflicts happened</p></li>
-</ul>
-<p>Click the <strong>Heatmap</strong> button and select:</p>
-<ul class="simple">
-<li><p>Traffic</p></li>
-<li><p>Delays</p></li>
-<li><p>Collisions</p></li>
-</ul>
-</section>
-<section id="scenario-details">
-<h2>Scenario Details<a class="headerlink" href="#scenario-details" title="Link to this heading"></a></h2>
-<p><strong>Random Maps</strong></p>
-<ul class="simple">
-<li><p>Randomly placed obstacles</p></li>
-<li><p>Various density levels (10%, 20%, 30%)</p></li>
-<li><p>Good for general algorithm testing</p></li>
-</ul>
-<p><strong>Maze Environments</strong></p>
-<ul class="simple">
-<li><p>Structured obstacle patterns</p></li>
-<li><p>Narrow corridors and bottlenecks</p></li>
-<li><p>Tests coordination in constrained spaces</p></li>
-</ul>
-<p><strong>Warehouse Layouts</strong></p>
-<ul class="simple">
-<li><p>Simulates automated warehouse</p></li>
-<li><p>Shelf rows and aisles</p></li>
-<li><p>Realistic multi-agent coordination scenarios</p></li>
-</ul>
-<p><strong>Open Space</strong></p>
-<ul class="simple">
-<li><p>Minimal obstacles</p></li>
-<li><p>Tests pure coordination without environmental constraints</p></li>
-<li><p>Highlights algorithm efficiency</p></li>
-</ul>
-</section>
-<section id="algorithm-comparison">
-<h2>Algorithm Comparison<a class="headerlink" href="#algorithm-comparison" title="Link to this heading"></a></h2>
-<p>Use the demo to compare different algorithms:</p>
-<p><strong>Viewing Multiple Solutions</strong></p>
-<ol class="arabic simple">
-<li><p>Load a scenario with Algorithm A</p></li>
-<li><p>Note the statistics (makespan, delays)</p></li>
-<li><p>Click <strong>Reset</strong></p></li>
-<li><p>Change to Algorithm B</p></li>
-<li><p>Click <strong>Load</strong> again</p></li>
-<li><p>Compare the results</p></li>
-</ol>
-<p><strong>Key Observations</strong></p>
-<ul class="simple">
-<li><p><strong>CBS</strong> - Optimal but may take longer to compute</p></li>
-<li><p><strong>EECBS</strong> - Faster with slightly longer paths</p></li>
-<li><p><strong>PBS</strong> - Very fast but potentially more delays</p></li>
-<li><p><strong>LaCAM</strong> - Good balance of speed and quality</p></li>
-</ul>
 </section>
 <section id="export-and-share">
 <h2>Export and Share<a class="headerlink" href="#export-and-share" title="Link to this heading"></a></h2>
@@ -524,81 +419,6 @@ and computation time.</p>
 <li><p>Click <strong>Export Stats</strong> 📊 button</p></li>
 <li><p>Downloads CSV file with detailed metrics</p></li>
 <li><p>Import into Excel, Python, or other tools for analysis</p></li>
-</ul>
-<p><strong>Share Scenario</strong></p>
-<ul class="simple">
-<li><p>Click <strong>Share</strong> 🔗 button</p></li>
-<li><p>Generates a unique URL for this specific scenario</p></li>
-<li><p>Share with others to view the same simulation</p></li>
-</ul>
-</section>
-<section id="tips-for-best-experience">
-<h2>Tips for Best Experience<a class="headerlink" href="#tips-for-best-experience" title="Link to this heading"></a></h2>
-<p><strong>Performance</strong></p>
-<ul class="simple">
-<li><p>Close other browser tabs for smoother playback</p></li>
-<li><p>Use Chrome or Firefox for best performance</p></li>
-<li><p>Reduce agent count if visualization lags</p></li>
-<li><p>Disable heatmap for faster rendering</p></li>
-</ul>
-<p><strong>Learning</strong></p>
-<ul class="simple">
-<li><p>Start with small scenarios (10-20 agents)</p></li>
-<li><p>Use slow motion (0.5×) to understand coordination</p></li>
-<li><p>Compare same scenario with different algorithms</p></li>
-<li><p>Toggle planned vs executed paths to see differences</p></li>
-</ul>
-<p><strong>Exploration</strong></p>
-<ul class="simple">
-<li><p>Try edge cases (very crowded or sparse)</p></li>
-<li><p>Observe bottlenecks in maze scenarios</p></li>
-<li><p>Watch how delays propagate through the system</p></li>
-<li><p>Compare optimal vs fast algorithms</p></li>
-</ul>
-</section>
-<section id="common-observations">
-<h2>Common Observations<a class="headerlink" href="#common-observations" title="Link to this heading"></a></h2>
-<p><strong>Planned vs Executed Paths</strong></p>
-<p>You’ll notice the executed paths often differ from planned paths due to:</p>
-<ul class="simple">
-<li><p><strong>Robot dynamics</strong> - Acceleration/deceleration constraints</p></li>
-<li><p><strong>Execution uncertainty</strong> - Small position/timing errors</p></li>
-<li><p><strong>Coordination delays</strong> - Waiting for other agents</p></li>
-<li><p><strong>Collision avoidance</strong> - Real-time adjustments</p></li>
-</ul>
-<p><strong>Delay Propagation</strong></p>
-<p>Watch how a single delay can cascade:</p>
-<ol class="arabic simple">
-<li><p>Agent A delayed at bottleneck</p></li>
-<li><p>Agent B must wait for Agent A</p></li>
-<li><p>Agent C delayed by Agent B</p></li>
-<li><p>Delays propagate through the system</p></li>
-</ol>
-<p><strong>Emergent Behaviors</strong></p>
-<p>Observe interesting phenomena:</p>
-<ul class="simple">
-<li><p><strong>Convoys</strong> - Agents following each other</p></li>
-<li><p><strong>Oscillations</strong> - Agents adjusting back and forth</p></li>
-<li><p><strong>Deadlocks</strong> - Mutual waiting situations</p></li>
-<li><p><strong>Throughput limits</strong> - Maximum flow through corridors</p></li>
-</ul>
-</section>
-<section id="limitations">
-<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<p>The web demo is a simplified visualization:</p>
-<ul class="simple">
-<li><p>Pre-computed solutions only (no online planning)</p></li>
-<li><p>Limited scenario selection</p></li>
-<li><p>Simplified physics model</p></li>
-<li><p>Maximum ~100 agents for performance</p></li>
-</ul>
-<p>For full SMART capabilities, use the desktop version:</p>
-<ul class="simple">
-<li><p>Custom maps and scenarios</p></li>
-<li><p>Integrate your own planner</p></li>
-<li><p>Full physics simulation</p></li>
-<li><p>Thousands of agents</p></li>
-<li><p>Detailed statistics and logging</p></li>
 </ul>
 </section>
 <section id="next-steps">
