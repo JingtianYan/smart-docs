@@ -64,12 +64,7 @@
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#playback-controls">Playback Controls</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#statistics-panel">Statistics Panel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#interactive-features">Interactive Features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web_demo.html#scenario-details">Scenario Details</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web_demo.html#algorithm-comparison">Algorithm Comparison</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#export-and-share">Export and Share</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web_demo.html#tips-for-best-experience">Tips for Best Experience</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web_demo.html#common-observations">Common Observations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web_demo.html#limitations">Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#next-steps">Next Steps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#try-it-now">Try It Now</a></li>
 </ul>
@@ -384,18 +379,25 @@ Agent 1:(10,5,0)-&gt;(11,5,1)-&gt;(12,5,2)-&gt;...
 <section id="output-statistics">
 <h2>Output Statistics<a class="headerlink" href="#output-statistics" title="Link to this heading"></a></h2>
 <p>SMART generates a CSV file with execution statistics:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>agent_id,makespan,sum_of_costs,num_delays,num_collisions
-0,45,45,2,0
-1,52,53,3,1
-...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>steps finish sim,sum of steps finish sim,time finish sim,sum finish time,original plan cost,#type-2 edges,#type-1 edges,#Nodes,#Move,#Rotate,#Consecutive Move,#Agent pair,instance name,number of agent
 </pre></div>
 </div>
 <p><strong>Metrics:</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">makespan</span></code> - Time to reach goal</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sum_of_costs</span></code> - Total path cost</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">num_delays</span></code> - Execution delays encountered</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">num_collisions</span></code> - Collision count</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">steps</span> <span class="pre">finish</span> <span class="pre">sim</span></code> - Number of simulation steps completed</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sum</span> <span class="pre">of</span> <span class="pre">steps</span> <span class="pre">finish</span> <span class="pre">sim</span></code> - Sum of per-agent completed simulation steps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">finish</span> <span class="pre">sim</span></code> - Wall-clock time to finish simulation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sum</span> <span class="pre">finish</span> <span class="pre">time</span></code> - Sum of per-agent finish times</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">original</span> <span class="pre">plan</span> <span class="pre">cost</span></code> - Cost of the input planner solution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#type-2</span> <span class="pre">edges</span></code> - Count of type-2 edges in the execution graph</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#type-1</span> <span class="pre">edges</span></code> - Count of type-1 edges in the execution graph</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#Nodes</span></code> - Number of nodes in the execution graph</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#Move</span></code> - Number of move actions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#Rotate</span></code> - Number of rotate actions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#Consecutive</span> <span class="pre">Move</span></code> - Number of consecutive move patterns</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#Agent</span> <span class="pre">pair</span></code> - Number of interacting agent pairs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">name</span></code> - Input instance/path file name</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">of</span> <span class="pre">agent</span></code> - Number of agents in the run</p></li>
 </ul>
 </section>
 <section id="configuration-files">
