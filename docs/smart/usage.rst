@@ -135,17 +135,24 @@ SMART generates a CSV file with execution statistics:
 
 .. code-block:: text
 
-   agent_id,makespan,sum_of_costs,num_delays,num_collisions
-   0,45,45,2,0
-   1,52,53,3,1
-   ...
+   steps finish sim,sum of steps finish sim,time finish sim,sum finish time,original plan cost,#type-2 edges,#type-1 edges,#Nodes,#Move,#Rotate,#Consecutive Move,#Agent pair,instance name,number of agent
 
 **Metrics:**
 
-* ``makespan`` - Time to reach goal
-* ``sum_of_costs`` - Total path cost
-* ``num_delays`` - Execution delays encountered
-* ``num_collisions`` - Collision count
+* ``steps finish sim`` - Number of simulation steps completed
+* ``sum of steps finish sim`` - Sum of per-agent completed simulation steps
+* ``time finish sim`` - Wall-clock time to finish simulation
+* ``sum finish time`` - Sum of per-agent finish times
+* ``original plan cost`` - Cost of the input planner solution
+* ``#type-2 edges`` - Count of type-2 edges in the execution graph
+* ``#type-1 edges`` - Count of type-1 edges in the execution graph
+* ``#Nodes`` - Number of nodes in the execution graph
+* ``#Move`` - Number of move actions
+* ``#Rotate`` - Number of rotate actions
+* ``#Consecutive Move`` - Number of consecutive move patterns
+* ``#Agent pair`` - Number of interacting agent pairs
+* ``instance name`` - Input instance/path file name
+* ``number of agent`` - Number of agents in the run
 
 Configuration Files
 -------------------
