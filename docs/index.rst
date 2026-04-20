@@ -1,57 +1,61 @@
 Welcome to SMART
 ================
 
-SMART is a simulator for multi-agent path finding, built on `ARGoS <https://www.argos-sim.info/>`_. 
-It is open-source, cross platform, and supports realistic physics-based simulation 
-for evaluating MAPF algorithms with hundreds to thousands of agents.
+SMART is an open-source testbed for executing and evaluating Multi-Agent Path
+Finding (MAPF) plans in a realistic simulator. The public codebase combines
+`ARGoS 3 <https://www.argos-sim.info/>`_ for simulation, an Action Dependency
+Graph (ADG) based execution monitor, and helper scripts for turning benchmark
+maps and scenarios into runnable experiments.
 
-Our goal is to develop SMART as a platform for MAPF research to bridge the gap 
-between algorithmic planning and real-world deployment. For this purpose, SMART 
-exposes APIs to integrate various MAPF planners and retrieve execution statistics.
+This documentation site tracks the current public SMART sources:
 
-**Video Demo**
+* Source code: `smart-mapf/smart <https://github.com/smart-mapf/smart>`_
+* Paper: `arXiv:2503.04798 <https://arxiv.org/abs/2503.04798>`_
+* Documentation source: `JingtianYan/smart-docs <https://github.com/JingtianYan/smart-docs>`_
 
-Watch the SMART demonstration video on YouTube: `https://www.youtube.com/watch?v=TX-oGSgM8VQ <https://www.youtube.com/watch?v=TX-oGSgM8VQ>`_
+Video Demo
+----------
+
+Watch the SMART demonstration video on YouTube:
+`https://www.youtube.com/watch?v=TX-oGSgM8VQ <https://www.youtube.com/watch?v=TX-oGSgM8VQ>`_
 
 How to Get It
 -------------
 
-**Download**
-
-* Download the latest release from `GitHub Releases <https://github.com/smart-mapf/smart/releases>`_
-
-**Build from Source**
+The public repository is distributed as source code:
 
 * :doc:`smart/build_linux` - Build on Ubuntu/Linux
-* :doc:`smart/installation` - General installation guide
+* :doc:`smart/installation` - Installation summary
 
 How to Use It
 -------------
 
-SMART provides multiple ways to explore and use the testbed:
+SMART provides a few practical entry points:
 
-* **Try the Web Demo**: Experience SMART instantly at https://smart-mapf.github.io/demo/ - see :doc:`smart/web_demo` for a full walkthrough
-* **Quick Start**: See :doc:`smart/running` to launch your first simulation
-* **Python API**: Use the :doc:`smart/apis` for programmatic control
-* **Planner Integration**: Connect your MAPF algorithm via :doc:`smart/planner_integration`
-* **Configuration**: Customize simulations using :doc:`smart/settings`
+* **Web demo**: Explore the public demo at https://smart-mapf.github.io/demo/ - see :doc:`smart/web_demo`
+* **Run the shipped examples**: See :doc:`smart/running` and :doc:`smart/examples`
+* **Prepare inputs**: Use :doc:`smart/input_formats` for `.map`, `.scen`, and path files
+* **Integrate a planner**: Write a SMART path file and run it with :doc:`smart/planner_integration`
+* **Inspect outputs**: See :doc:`smart/apis` for the current command-line interface and statistics outputs
 
-Check out our :doc:`smart/examples` for common use cases.
+What the Public Repo Includes
+-----------------------------
 
-Tutorials
----------
+The current public SMART repository contains:
 
-* :doc:`smart/examples` - Getting started examples
-* :doc:`smart/paper` - Research paper and benchmarks
+* ``run_sim.py`` as the main helper script
+* ``ArgosConfig/`` for generating ARGoS configuration files
+* ``server/`` for the ADG execution-monitoring server
+* ``client/`` for ARGoS controllers and executors
+* Example maps, scenarios, and path files in the repository root
 
-Participate
------------
+Research Paper
+--------------
 
-**Paper**
+The technical background and evaluation are described in the SMART paper:
+`Advancing MAPF towards the Real World: A Scalable Multi-Agent Realistic Testbed (SMART) <https://arxiv.org/abs/2503.04798>`_.
 
-More technical details are available in the `SMART paper (arXiv:2503.04798) <https://arxiv.org/abs/2503.04798>`_.
-
-Please cite this as:
+Please cite it as:
 
 .. code-block:: bibtex
 
@@ -62,34 +66,24 @@ Please cite this as:
      year={2025}
    }
 
-**Contribute**
+Participate
+-----------
 
-* `GitHub Repository <https://github.com/smart-mapf/smart>`_
-* `Issue Tracker <https://github.com/smart-mapf/smart/issues>`_
-
-**Who is Using SMART?**
-
-See :doc:`smart/who_is_using` for projects and research using SMART.
-
-What's New
-----------
-
-* Initial release with ARGoS-based simulation
-* Support for 100+ agents
-* Action Dependency Graph execution monitoring
-* Python API for planner integration
+* Source repository: `smart-mapf/smart <https://github.com/smart-mapf/smart>`_
+* Source issue tracker: `smart-mapf/smart issues <https://github.com/smart-mapf/smart/issues>`_
+* Documentation repository: `JingtianYan/smart-docs <https://github.com/JingtianYan/smart-docs>`_
 
 FAQ
 ---
 
-If you run into problems, check the :doc:`smart/faq`.
+If you run into problems, check :doc:`smart/faq`.
 
 License
 -------
 
-This project is released under the MIT License.
+SMART is released under the MIT License.
 
-Copyright © 2025 Carnegie Mellon University
+Copyright (c) 2025 Carnegie Mellon University
 
 Getting Started
 ---------------

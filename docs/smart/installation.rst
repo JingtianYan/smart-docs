@@ -1,22 +1,24 @@
 Installation
 ============
 
-This page summarises the main installation and build steps for SMART (from the
-original project README). The SMART project targets Ubuntu-like systems for
-native builds; the steps below show the minimal commands for compiling and
-running the code in a local development environment.
+This page summarises the main installation and build steps for SMART from the
+public project README. The current public repository is a source-based project.
+The README explicitly mentions Ubuntu 22.04, and the steps below show the
+minimal build flow for a local development environment.
 
 Prerequisites
 -------------
 
-- CMake (>= 3.16)
-- A C++17 compatible compiler (g++ or clang)
-- Boost (program_options, system, filesystem)
-- Argos 3 (for robot simulation integration)
-- rpclib (for RPC support)
+* CMake (>= 3.16)
+* A modern C++ compiler supported by the repo CMake files
+* Boost (program_options, system, filesystem)
+* ARGoS 3 (for robot simulation integration)
+* Git, to fetch the repo and submodules
 
-Quick build (native)
----------------------
+The SMART repository vendors rpclib as a git submodule.
+
+Quick Build
+-----------
 
 From the SMART project root:
 
@@ -29,7 +31,7 @@ From the SMART project root:
    cmake ..
    make -j
 
-To produce a Release build with optimizations:
+For a release build with optimizations:
 
 .. code-block:: bash
 
@@ -39,6 +41,8 @@ To produce a Release build with optimizations:
 Notes
 -----
 
-- If you only want to use the Python simulator components and avoid native
-  compilation, consult the `Running` page for Python-based instructions that
-  may require fewer system packages.
+* The top-level CMake configuration can skip the ARGoS client component if
+  ARGoS is not found, but a full SMART run still needs ARGoS plus the built
+  controller library.
+* The public repo does not currently provide a Python-only install path.
+* See :doc:`build_linux` for a more detailed Linux walkthrough.

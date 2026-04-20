@@ -2,94 +2,79 @@ FAQ - Frequently Asked Questions
 =================================
 
 Installation and Building
---------------------------
+-------------------------
 
 **Q: Which operating systems are supported?**
 
-A: SMART officially supports:
+A: The current public README explicitly mentions Ubuntu 22.04. The paper reports
+experiments on Ubuntu 20.04. This docs site avoids claiming broader official
+platform support than that.
 
-* Ubuntu 20.04+ (recommended)
+**Q: What do I need to build SMART?**
 
-Windows is not currently supported for native builds. Consider using Docker.
+A: For a full run, you need:
 
-**Q: Build fails with linking errors**
+* a Linux build environment
+* CMake and a C++ compiler
+* Boost
+* ARGoS 3
+* the rpclib submodule bundled with the SMART repo
 
-A: This often happens if conda is in your PATH. Try:
+**Q: Can I use SMART without compiling native code?**
 
-.. code-block:: bash
-
-   # Temporarily remove conda from PATH
-   export PATH=/usr/bin:/usr/local/bin:$PATH
-   cd build
-   cmake ..
-   make
-
-**Q: CMake cannot find ARGoS**
-
-A: Specify the ARGoS installation path:
-
-.. code-block:: bash
-
-   cmake -DARGOS_PREFIX=/usr/local ..
-
-Or set the PKG_CONFIG_PATH:
-
-.. code-block:: bash
-
-   export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+A: Not in the current public repository. ``run_sim.py`` still depends on the
+native server binary and the ARGoS client/controller build.
 
 **Q: Do I need GPU support?**
 
-A: No, SMART runs on CPU only. GPU is not required for the physics simulation
-or visualization.
+A: No dedicated GPU requirement is documented in the public repo. SMART runs on
+CPU-based ARGoS simulation.
 
 Running Simulations
 -------------------
 
-**Q: The simulation runs too slowly**
+**Q: What is the simplest command to run?**
 
-A: Try these options:
+A: The upstream README example is:
 
-1. Use headless mode: ``--headless=True``
-2. Reduce visualization quality in ARGoS settings
-3. Decrease physics accuracy: ``--physics_accuracy=low``
-4. Use a release build: ``cmake -DCMAKE_BUILD_TYPE=Release ..``
+.. code-block:: bash
+
+   python run_sim.py --map_name=random-32-32-20.map --scen_name=random-32-32-20-random-1.scen --num_agents=50 --path_filename=example_paths_xy.txt --flip_coord=0
 
 **Q: Simulation hangs or freezes**
 
 A: Check these common issues:
 
-* Server port already in use (try different ``--port_num``)
-* Path file has syntax errors
-* Number of paths doesn't match ``--num_agents``
-* ARGoS configuration issue (check logs)
+* server port already in use
+* path file has syntax errors
+* number of paths does not match ``--num_agents``
+* ARGoS configuration issue
 
 **Q: How many agents can SMART handle?**
 
-A: Performance varies by hardware:
-
-* With visualization: ~100 agents at 10 FPS
-* Headless mode: 500-1000+ agents
-* For larger scales, consider time-scaling or batch processing
+A: The paper reports headless experiments up to 2,000 robots. Your practical
+limit will still depend on the map, hardware, and whether visualization is
+enabled.
 
 **Q: Can I run multiple simulations in parallel?**
 
-A: Yes, use different port numbers:
+A: Yes, as long as you keep ports, output files, and generated ARGoS filenames
+separate:
 
 .. code-block:: bash
 
    # Terminal 1
-   python run_sim.py --port_num=8182 ...
-   
+   python run_sim.py --port_num=8182 --stats_name=run1.csv --argos_config_name=run1.argos ...
+
    # Terminal 2
-   python run_sim.py --port_num=8183 ...
+   python run_sim.py --port_num=8183 --stats_name=run2.csv --argos_config_name=run2.argos ...
 
 Path and Map Files
 ------------------
 
 **Q: What map format does SMART use?**
 
-A: SMART uses the MovingAI map format (``.map`` files):
+A: SMART uses MovingAI-style ``.map`` files:
 
 .. code-block:: text
 
@@ -100,7 +85,7 @@ A: SMART uses the MovingAI map format (``.map`` files):
    @@@@@@@@...
    @......@...
 
-Where ``@`` = obstacle, ``.`` = free space.
+In the current public converter, ``@`` and ``T`` are treated as obstacles.
 
 **Q: Where can I get map files?**
 
@@ -108,205 +93,135 @@ A: Download from:
 
 * `MovingAI Lab Benchmarks <https://movingai.com/benchmarks/>`_
 * SMART repository examples
-* Create custom maps (text files)
+* Your own text maps
 
 **Q: My planner uses different coordinates**
 
-A: Use ``--flip_coord=1`` to convert (y,x) to (x,y), or convert in your
-wrapper script.
+A: Use ``--flip_coord=1`` if your path file is written in ``(y,x,t)`` order.
+Use ``--flip_coord=0`` for ``(x,y,t)``.
 
-**Q: What if paths have collisions?**
+**Q: Can my path file include diagonal moves?**
 
-A: SMART will still execute the paths, but will:
-
-* Detect and log collisions
-* Report collision statistics
-* Show delays and execution failures
-
-Use this to evaluate how robust your planner is to execution uncertainty.
+A: No. The current parser rejects consecutive locations whose Manhattan
+distance is 2 or more. Waits and axis-aligned single-cell moves are fine.
 
 API and Integration
 -------------------
 
 **Q: Can I use SMART with my custom planner?**
 
-A: Yes! See :doc:`planner_integration` for a complete guide. SMART works with
-any planner that outputs timestamped paths.
+A: Yes. See :doc:`planner_integration`. The basic contract is that your planner
+writes a SMART text path file.
+
+**Q: Does the public repo ship a Python client library?**
+
+A: No. The current public repository does not include a packaged
+``smart_client`` module or a public ``SMARTClient`` API. The supported user
+workflow is the command-line path described in :doc:`usage`.
 
 **Q: Do I need to write C++ code?**
 
-A: No, the Python API is sufficient for most use cases. Only modify C++ if
-adding new sensors or robot models.
+A: Not for the basic workflow. If you want to change controller behavior,
+server logic, parsing rules, or metrics, then you will need to modify the C++
+or ARGoS-side code.
 
-**Q: Can SMART do online replanning?**
+**Q: Can SMART do online replanning through a public API?**
 
-A: The current version focuses on plan execution. Online replanning can be
-implemented by:
-
-1. Detecting delays/collisions via callbacks
-2. Calling your replanner
-3. Updating paths via API
-
-**Q: How do I access raw robot trajectories?**
-
-A: Enable trajectory logging:
-
-.. code-block:: python
-
-   client.set_logging({'log_trajectories': True})
-   stats = client.run()
-   trajectories = stats['trajectories']
+A: Not through a documented public interface in the current repo. The public
+workflow is path-file execution rather than an interactive replanning API.
 
 Results and Analysis
 --------------------
 
 **Q: What metrics does SMART provide?**
 
-A: Key metrics include:
+A: The current public server writes these main fields:
 
-* Makespan (max completion time)
-* Sum of costs
-* Throughput (agents/second)
-* Success rate
-* Number of delays
-* Number of collisions
-* Per-agent statistics
+* ``steps finish sim``
+* ``sum of steps finish sim``
+* ``time finish sim``
+* ``sum finish time``
+* ``original plan cost``
+* ``#type-2 edges``
+* ``#type-1 edges``
+* ``#Nodes``
+* ``#Move``
+* ``#Rotate``
+* ``#Consecutive Move``
+* ``#Agent pair``
+* ``instance name``
+* ``number of agent``
 
-**Q: How is success rate calculated?**
+It also prints a JSON summary with the same main values plus several
+second-based timing fields.
 
-A: Success rate = (agents reaching goal) / (total agents)
+**Q: Does the public repo report throughput or success rate?**
 
-An agent is considered successful if it reaches within threshold distance of
-its goal.
-
-**Q: What causes delays in execution?**
-
-A: Delays can occur from:
-
-* Robot kinodynamic constraints
-* Collisions or near-collisions
-* Coordination overhead
-* Execution uncertainty
-* Communication delays
+A: Those metrics are not part of the current shipped CSV/JSON output format in
+the public repo.
 
 **Q: How do I reproduce results?**
 
-A: Set a random seed:
-
-.. code-block:: bash
-
-   python run_sim.py --random_seed=42 ...
-
-Or in Python:
-
-.. code-block:: python
-
-   client.set_config({'random_seed': 42})
+A: The current public ``run_sim.py`` does not expose a ``--random_seed`` flag.
+The generated ARGoS config hardcodes ``random_seed="124"``. If you want a
+different seed, edit the generated ``.argos`` file before launching ARGoS
+manually.
 
 Visualization
 -------------
 
 **Q: How do I control the camera in ARGoS?**
 
-A: Use these controls:
+A: Camera controls come from the ARGoS visualizer. The generated config only
+sets the initial camera placement.
 
-* Mouse drag - Rotate view
-* Scroll wheel - Zoom
-* Arrow keys - Pan camera
-* R - Reset camera
-* F10 - Fast forward toggle
+**Q: Is there a public web demo?**
 
-**Q: Can I record videos?**
-
-A: Yes, use ARGoS's built-in recording:
-
-1. In the visualizer, click the record button
-2. Or use screen recording software (OBS, QuickTime, etc.)
-
-**Q: Can I customize robot appearance?**
-
-A: Edit the ARGoS configuration file:
-
-.. code-block:: xml
-
-   <footbot id="fb_0">
-     <body position="5,5,0" color="red" />
-   </footbot>
+A: Yes. See :doc:`web_demo` for the currently verified public demo behavior.
 
 Advanced Topics
 ---------------
 
 **Q: Can I use different robot models?**
 
-A: Currently SMART uses footbot models. To add new models, you'll need to:
+A: The current public repo ships the foot-bot based controller path. Adding a
+different robot model would require code changes in the client/controller side
+and in ARGoS config generation.
 
-1. Implement ARGoS controller
-2. Update CMakeLists.txt
-3. Modify configuration generation
+**Q: Where should I look if I want to modify metrics or parsing?**
 
-**Q: Can I add sensor noise?**
+A:
 
-A: Yes, configure noise in settings:
-
-.. code-block:: python
-
-   client.set_config({
-       'sensor_noise': 0.01,  # Position noise (meters)
-       'actuator_noise': 0.05  # Velocity noise
-   })
-
-**Q: Can I simulate communication delays?**
-
-A: Yes, set communication parameters:
-
-.. code-block:: python
-
-   client.set_config({
-       'communication_delay': 0.1,  # Seconds
-       'communication_range': 10.0  # Meters
-   })
-
-**Q: Does SMART support 3D environments?**
-
-A: Currently SMART focuses on 2D ground navigation. 3D support would require
-significant ARGoS configuration changes.
+* metrics and output formatting: ``server/src/ADG_server.cpp``
+* path parsing and action conversion: ``server/src/parser.cpp``
+* ARGoS XML generation: ``ArgosConfig/ToArgos.py``
 
 Troubleshooting
 ---------------
 
 **Q: "Connection refused" error**
 
-A: The SMART server is not running. Check:
+A: Check that:
 
-1. Server binary compiled: ``ls build/server/ADG_server``
-2. Port not in use: ``lsof -i :8182``
-3. Firewall not blocking connection
+* ``build/server/ADG_server`` exists
+* the chosen port is free
+* the server and controller use the same port number
 
 **Q: "Segmentation fault" when running**
 
 A: Common causes:
 
 * ARGoS not properly installed
-* Path file has wrong format
-* Memory issue with large agent counts
-
-Check the logs in ``/tmp/smart_*.log``
-
-**Q: Statistics show zero throughput**
-
-A: Possible causes:
-
-* No agents reached their goals
-* Simulation timeout too short
-* Paths are invalid or have syntax errors
+* path file has wrong format
+* memory pressure with larger runs
 
 **Q: Visualization window is blank**
 
 A: Try:
 
-* Update graphics drivers
-* Check ARGoS OpenGL support: ``argos3 -q all``
-* Use a simpler environment/map
+* checking that ARGoS itself runs correctly
+* using a simpler map
+* rebuilding after verifying the ARGoS installation
 
 Getting Help
 ------------
@@ -315,23 +230,18 @@ Getting Help
 
 A:
 
-* `GitHub Discussions <https://github.com/smart-mapf/smart/discussions>`_
 * `Issue Tracker <https://github.com/smart-mapf/smart/issues>`_
-* Email the maintainers (see repository)
+* `Documentation repository <https://github.com/JingtianYan/smart-docs>`_
 
 **Q: How do I report a bug?**
 
-A: Open an issue on GitHub with:
+A: Open an issue with:
 
-1. SMART version
-2. Operating system
-3. Complete error message
-4. Minimal reproduction case
-5. Expected vs actual behavior
-
-**Q: Can I contribute to SMART?**
-
-A: Yes! See the `Contributing Guide <https://github.com/smart-mapf/smart/blob/main/CONTRIBUTING.md>`_ in the repository.
+1. SMART version or commit
+2. operating system
+3. complete error message
+4. minimal reproduction case
+5. expected vs actual behavior
 
 Still Have Questions?
 ---------------------
@@ -340,5 +250,5 @@ Check these resources:
 
 * :doc:`overview` - Project overview
 * :doc:`usage` - Detailed usage guide
-* :doc:`apis` - API reference
+* :doc:`apis` - Public interfaces and outputs
 * `Paper <https://arxiv.org/abs/2503.04798>`_ - Technical details

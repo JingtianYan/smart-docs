@@ -1,12 +1,13 @@
 Build on Linux
 ==============
 
-This page provides instructions for building SMART on Ubuntu and other Linux distributions.
+This page provides instructions for building SMART on Ubuntu and similar Linux
+distributions.
 
 Prerequisites
 -------------
 
-The following packages are required:
+The public README explicitly mentions Ubuntu 22.04. A minimal package set is:
 
 .. code-block:: bash
 
@@ -19,8 +20,8 @@ The following packages are required:
 
 Additional dependencies:
 
-* **ARGoS 3** - Physics-based robot simulator
-* **rpclib** - For RPC communication between planner and simulator
+* **ARGoS 3** - physics-based robot simulator
+* **rpclib** - included as a git submodule in the SMART repository
 
 Install ARGoS 3
 ---------------
@@ -38,11 +39,6 @@ Quick install:
    cmake ../src
    make -j$(nproc)
    sudo make install
-
-Install rpclib
---------------
-
-The SMART repository includes rpclib as a submodule.
 
 Build SMART
 -----------
@@ -73,10 +69,13 @@ After building, verify the installation:
 
 .. code-block:: bash
 
-   # Check if server binary was created
+   # Check if the server binary was created
    ls -l build/server/ADG_server
-   
-   # Run a simple test
+
+   # Check that ARGoS is available
+   argos3 -h
+
+   # Inspect the SMART helper CLI
    cd ..
    python run_sim.py --help
 
@@ -86,23 +85,16 @@ Troubleshooting
 **Linking errors with conda**
 
 If you encounter linking errors and have conda in your PATH, try temporarily
-removing conda from your PATH before building:
-
-.. code-block:: bash
-
-   # Edit ~/.bashrc and comment out conda initialization
-   # Then in a new terminal:
-   mkdir build && cd build
-   cmake ..
-   make -j$(nproc)
+removing conda from your shell environment before building. The upstream README
+mentions this as a common source of linking problems.
 
 **ARGoS not found**
 
-If CMake cannot find ARGoS, specify the installation path:
+If CMake cannot find ARGoS, install ARGoS 3 first and make sure its libraries
+and CMake metadata are visible to your build environment. Then re-run CMake.
 
-.. code-block:: bash
-
-   cmake -DARGOS_PREFIX=/usr/local ..
+If the client component is skipped during configuration, SMART will not have
+the controller library needed for a full simulation run.
 
 Next Steps
 ----------

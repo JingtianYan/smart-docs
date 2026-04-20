@@ -1,256 +1,115 @@
-Core APIs
-=========
+Interfaces and Outputs
+======================
 
-SMART provides Python APIs for interacting with the simulator and integrating
-MAPF planners.
+The current public SMART repository does **not** ship a packaged public Python
+client library such as ``SMARTClient``. The supported user-facing interface in
+the repository is the command-line workflow built around ``run_sim.py``, text
+input files, and the generated output files.
 
-Overview
---------
+Public Entry Point
+------------------
 
-The SMART APIs allow you to:
+The main entry point is ``run_sim.py`` in the source repository root:
 
-* Start and control simulations programmatically
-* Integrate custom MAPF planners
-* Retrieve real-time execution statistics
-* Monitor agent states and positions
+.. code-block:: bash
 
-Client-Server Architecture
---------------------------
+   python run_sim.py \
+       --map_name=random-32-32-20.map \
+       --scen_name=random-32-32-20-random-1.scen \
+       --num_agents=50 \
+       --path_filename=example_paths_xy.txt \
+       --flip_coord=0
 
-SMART uses an RPC-based client-server architecture:
+Current command-line arguments from ``python run_sim.py --help``:
 
-* **Server** - C++ ARGoS-based simulator (``ADG_server``)
-* **Client** - Python scripts communicate via RPC
-* **Port** - Default 8182 (configurable)
+* ``--map_name`` - input map file
+* ``--scen_name`` - input scenario file
+* ``--num_agents`` - number of agents to load from the scenario
+* ``--headless`` - whether to disable ARGoS visualization
+* ``--argos_config_name`` - generated ARGoS config filename
+* ``--path_filename`` - input path file for the MAPF plan
+* ``--stats_name`` - output CSV filename for simulation statistics
+* ``--port_num`` - RPC port shared by the server and robot executors
+* ``--flip_coord`` - coordinate convention flag, ``0`` for ``(x,y)``, ``1`` for ``(y,x)``
 
-Python API Reference
---------------------
+What ``run_sim.py`` Does
+------------------------
 
-**Basic Usage**
+For each run, ``run_sim.py``:
 
-.. code-block:: python
+1. Reads the `.map` and `.scen` files.
+2. Generates an ARGoS configuration file through ``ArgosConfig/``.
+3. Starts ``build/server/ADG_server`` with the selected path file.
+4. Starts ``argos3`` with the generated ``.argos`` file.
 
-   from smart_client import SMARTClient
-   
-   # Connect to SMART server
-   client = SMARTClient(port=8182)
-   
-   # Load simulation
-   client.load_simulation(
-       map_file="random-32-32-20.map",
-       scenario_file="random-32-32-20-random-1.scen",
-       num_agents=50
-   )
-   
-   # Set paths from your planner
-   client.set_paths(agent_paths)
-   
-   # Run simulation
-   stats = client.run()
-   
-   # Get results
-   print(f"Makespan: {stats['makespan']}")
-   print(f"Throughput: {stats['throughput']}")
+Public Outputs
+--------------
 
-**SMARTClient Class**
+The current repo produces three main kinds of outputs:
 
-.. code-block:: python
+* A generated ARGoS XML file, ``output.argos`` by default
+* A CSV file, ``stats.csv`` by default
+* A JSON summary printed by ``ADG_server`` to standard output at the end of the run
 
-   class SMARTClient:
-       """
-       Main client interface for SMART simulator.
-       """
-       
-       def __init__(self, host='localhost', port=8182):
-           """
-           Initialize client connection.
-           
-           Args:
-               host: Server hostname
-               port: Server port number
-           """
-           pass
-       
-       def load_simulation(self, map_file, scenario_file, num_agents):
-           """
-           Load a simulation scenario.
-           
-           Args:
-               map_file: Path to .map file
-               scenario_file: Path to .scen file
-               num_agents: Number of agents
-           """
-           pass
-       
-       def set_paths(self, paths):
-           """
-           Set planned paths for agents.
-           
-           Args:
-               paths: List of paths, one per agent
-                     Format: [[(x,y,t), (x,y,t), ...], ...]
-           """
-           pass
-       
-       def run(self, headless=False):
-           """
-           Execute the simulation.
-           
-           Args:
-               headless: Run without visualization
-               
-           Returns:
-               dict: Statistics including makespan, costs, delays
-           """
-           pass
-       
-       def get_agent_state(self, agent_id):
-           """
-           Get current state of an agent.
-           
-           Args:
-               agent_id: Agent identifier
-               
-           Returns:
-               dict: Position, velocity, status
-           """
-           pass
-       
-       def pause(self):
-           """Pause the simulation."""
-           pass
-       
-       def resume(self):
-           """Resume the simulation."""
-           pass
-       
-       def stop(self):
-           """Stop and cleanup the simulation."""
-           pass
+The CSV header written by the current server implementation is:
 
-Path Format
------------
+.. code-block:: text
 
-Paths should be provided as a list of waypoint tuples:
+   steps finish sim,sum of steps finish sim,time finish sim,sum finish time,original plan cost,#type-2 edges,#type-1 edges,#Nodes,#Move,#Rotate,#Consecutive Move,#Agent pair,instance name,number of agent
 
-.. code-block:: python
+The JSON summary contains the same main fields plus several time values in
+seconds:
 
-   # Single agent path
-   path = [
-       (5, 16, 0),   # (x, y, timestep)
-       (5, 17, 1),
-       (5, 18, 2),
-       (6, 18, 3),
-       # ... goal
-   ]
-   
-   # Multiple agents
-   all_paths = [
-       [(5,16,0), (5,17,1), ...],  # Agent 0
-       [(10,5,0), (11,5,1), ...],  # Agent 1
-       # ...
-   ]
-   
-   client.set_paths(all_paths)
+.. code-block:: text
 
-Statistics Output
------------------
+   steps finish sim
+   sum of steps finish sim
+   time finish sim
+   sum finish time
+   original plan cost
+   simulated makespan seconds
+   simulated sum of cost seconds
+   simulated average sum of cost seconds
+   #type-2 edges
+   #type-1 edges
+   #Nodes
+   #Move
+   #Rotate
+   #Consecutive Move
+   #Agent pair
+   instance name
+   number of agent
 
-The ``run()`` method returns a dictionary with execution statistics:
+Internal RPC Layer
+------------------
 
-.. code-block:: python
+SMART uses ``rpclib`` internally between the ADG server and the robot
+executors. In the current public code, the server binds the following methods:
 
-   stats = client.run()
-   
-   # Access statistics
-   print(f"Makespan: {stats['makespan']}")
-   print(f"Sum of costs: {stats['sum_of_costs']}")
-   print(f"Throughput: {stats['throughput']}")
-   print(f"Success rate: {stats['success_rate']}")
-   
-   # Per-agent statistics
-   for agent_id, agent_stats in stats['agents'].items():
-       print(f"Agent {agent_id}: {agent_stats['delays']} delays")
+* ``init``
+* ``update``
+* ``receive_update``
+* ``get_config``
+* ``update_finish_agent``
+* ``closeServer``
 
-Return format:
+These RPC calls are implementation details of the shipped controller/server
+pair. They are useful for code readers, but they are not documented as a
+stable public client API.
 
-.. code-block:: python
+What Is Not in the Public Repo
+------------------------------
 
-   {
-       'makespan': int,           # Maximum completion time
-       'sum_of_costs': int,       # Total path costs
-       'throughput': float,       # Agents/second
-       'success_rate': float,     # Fraction reaching goal
-       'agents': {
-           0: {
-               'makespan': int,
-               'cost': int,
-               'delays': int,
-               'collisions': int
-           },
-           # ...
-       }
-   }
+The current public repository does not include:
 
-Configuration API
------------------
-
-Customize simulation parameters:
-
-.. code-block:: python
-
-   client.set_config({
-       'robot_radius': 0.2,        # Robot size (meters)
-       'max_velocity': 0.5,        # Max speed (m/s)
-       'time_limit': 1000,         # Simulation time limit
-       'collision_threshold': 0.1  # Collision distance
-   })
-
-Event Callbacks
----------------
-
-Register callbacks for simulation events:
-
-.. code-block:: python
-
-   def on_collision(agent_a, agent_b, timestep):
-       print(f"Collision: Agent {agent_a} and {agent_b} at t={timestep}")
-   
-   def on_delay(agent_id, location, delay_time):
-       print(f"Agent {agent_id} delayed at {location}")
-   
-   client.register_callback('collision', on_collision)
-   client.register_callback('delay', on_delay)
-   
-   client.run()
-
-RPC Protocol
-------------
-
-For advanced users implementing custom clients, SMART uses rpclib with the
-following RPC methods:
-
-* ``load_scenario(map, scen, num_agents)`` - Load simulation
-* ``set_agent_paths(paths_json)`` - Set paths
-* ``run_simulation(headless)`` - Execute
-* ``get_statistics()`` - Retrieve results
-* ``pause_simulation()`` - Pause
-* ``resume_simulation()`` - Resume
-
-See the `rpclib documentation <https://github.com/rpclib/rpclib>`_ for details.
-
-Example Scripts
----------------
-
-Complete examples are available in the repository:
-
-* ``examples/simple_client.py`` - Basic API usage
-* ``examples/batch_experiment.py`` - Run multiple scenarios
-* ``examples/custom_planner.py`` - Integrate a MAPF planner
+* a packaged ``smart_client`` Python module
+* a public pause/resume callback API
+* a documented JSON or REST control layer
+* bundled example scripts named ``simple_client.py`` or ``batch_experiment.py``
 
 Next Steps
 ----------
 
-* :doc:`planner_integration` - Integrate your MAPF algorithm
-* :doc:`examples` - Complete examples
-* :doc:`usage` - Command-line usage
+* :doc:`planner_integration` - prepare planner outputs for SMART
+* :doc:`usage` - run the full workflow from source
+* :doc:`input_formats` - format maps, scenarios, and path files correctly

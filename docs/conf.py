@@ -48,15 +48,14 @@ else:
     tags.add("python3")
 
 intersphinx_mapping = {
-    'rtd': ('https://docs.readthedocs.io/en/stable/', None),
-    'rtd-dev': ('https://dev.readthedocs.io/en/stable/', None),
+    'rtd': ('https://docs.readthedocs.com/platform/stable/', None),
+    'rtd-dev': ('https://docs.readthedocs.com/dev/stable/', None),
     'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
 }
 
 html_theme = 'sphinx_rtd_theme'
 html_theme_options = {
     'logo_only': False,
-    'display_version': True,
     'navigation_depth': 5,
     'collapse_navigation': False,
     'sticky_navigation': True,
@@ -68,7 +67,7 @@ html_context = {
     'display_github': True,
     'github_user': 'smart-mapf',
     'github_repo': 'smart',
-    'github_version': 'main',
+    'github_version': 'master',
     'conf_py_path': '/docs/',
     # Disable version selector
     'current_version': 'latest',
