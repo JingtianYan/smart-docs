@@ -24,9 +24,13 @@ log() {
   printf '[deploy-gh-pages] %s\n' "$*"
 }
 
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd -P)"
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || true)"
 if [[ -z "$ROOT" ]]; then
-  echo "Not inside a git repository." >&2
+  ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || true)"
+fi
+if [[ -z "$ROOT" ]]; then
+  echo "Not inside a git repository, and could not locate one from the script path." >&2
   exit 1
 fi
 
