@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Core APIs &mdash; SMART 1.0</title>
+  <title>Interfaces and Outputs &mdash; SMART 1.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=8043ffa4" />
@@ -59,26 +59,25 @@
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#accessing-the-demo">Accessing the Demo</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#interface-layout">Interface Layout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web_demo.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web_demo.html#understanding-the-visualization">Understanding the Visualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web_demo.html#playback-controls">Playback Controls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web_demo.html#bundled-example-maps">Bundled Example Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web_demo.html#using-bundled-examples">Using Bundled Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web_demo.html#using-your-own-files">Using Your Own Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web_demo.html#playback">Playback</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#statistics-panel">Statistics Panel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#interactive-features">Interactive Features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web_demo.html#export-and-share">Export and Share</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#next-steps">Next Steps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web_demo.html#try-it-now">Try It Now</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#quick-build-native">Quick build (native)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#quick-build">Quick Build</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#notes">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="build_linux.html">Build on Linux</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="build_linux.html#prerequisites">Prerequisites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="build_linux.html#install-argos-3">Install ARGoS 3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="build_linux.html#install-rpclib">Install rpclib</a></li>
 <li class="toctree-l2"><a class="reference internal" href="build_linux.html#build-smart">Build SMART</a></li>
 <li class="toctree-l2"><a class="reference internal" href="build_linux.html#verify-installation">Verify Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="build_linux.html#troubleshooting">Troubleshooting</a></li>
@@ -95,7 +94,6 @@
 <li class="toctree-l2"><a class="reference internal" href="input_formats.html#map-files">Map Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="input_formats.html#scenario-files">Scenario Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="input_formats.html#path-files">Path Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="input_formats.html#json-format-alternative">JSON Format (Alternative)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="input_formats.html#validation">Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="input_formats.html#common-issues">Common Issues</a></li>
 <li class="toctree-l2"><a class="reference internal" href="input_formats.html#examples">Examples</a></li>
@@ -114,26 +112,25 @@
 <li class="toctree-l2"><a class="reference internal" href="usage.html#path-file-format">Path File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#coordinate-systems">Coordinate Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#output-statistics">Output Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#generated-files">Generated Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#configuration-files">Configuration Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#map-and-scenario-files">Map and Scenario Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#next-steps">Next Steps</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#example-run-with-provided-example-path-files">Example: run with provided example path files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#shipped-example-files">Shipped Example Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#run-the-readme-example">Run the README Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#inspecting-example-outputs">Inspecting example outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#larger-example">Larger Example</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Core APIs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#client-server-architecture">Client-Server Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#python-api-reference">Python API Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#path-format">Path Format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#statistics-output">Statistics Output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configuration-api">Configuration API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#event-callbacks">Event Callbacks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rpc-protocol">RPC Protocol</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#example-scripts">Example Scripts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Interfaces and Outputs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#public-entry-point">Public Entry Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-run-sim-py-does">What <code class="docutils literal notranslate"><span class="pre">run_sim.py</span></code> Does</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#public-outputs">Public Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#internal-rpc-layer">Internal RPC Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-not-in-the-public-repo">What Is Not in the Public Repo</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
 </ul>
 </li>
@@ -141,12 +138,9 @@
 <li class="toctree-l2"><a class="reference internal" href="planner_integration.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="planner_integration.html#planner-output-format">Planner Output Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="planner_integration.html#integration-template">Integration Template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="planner_integration.html#common-planners">Common Planners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="planner_integration.html#batch-evaluation">Batch Evaluation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="planner_integration.html#coordinate-system-handling">Coordinate System Handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="planner_integration.html#dealing-with-continuous-time">Dealing with Continuous Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="planner_integration.html#path-requirements">Path Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="planner_integration.html#performance-tips">Performance Tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="planner_integration.html#example-full-integration">Example: Full Integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="planner_integration.html#next-steps">Next Steps</a></li>
 </ul>
 </li>
@@ -163,16 +157,9 @@
 <li class="toctree-l3"><a class="reference internal" href="settings.html#physics-engine">Physics Engine</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="settings.html#python-api-configuration">Python API Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#command-line-configuration">Command Line Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="settings.html#advanced-settings">Advanced Settings</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="settings.html#action-dependency-graph">Action Dependency Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="settings.html#logging-and-output">Logging and Output</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="settings.html#performance-tuning">Performance Tuning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="settings.html#environment-variables">Environment Variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="settings.html#configuration-profiles">Configuration Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#editing-the-generated-xml">Editing the Generated XML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#what-is-not-exposed-as-a-public-setting">What Is Not Exposed as a Public Setting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#next-steps">Next Steps</a></li>
 </ul>
 </li>
@@ -182,7 +169,7 @@
 <li class="toctree-l3"><a class="reference internal" href="architecture.html#argos-simulator">ARGoS Simulator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="architecture.html#action-dependency-graph-adg">Action Dependency Graph (ADG)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="architecture.html#rpc-communication">RPC Communication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="architecture.html#python-client">Python Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#wrapper-script">Wrapper Script</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="architecture.html#execution-flow">Execution Flow</a></li>
@@ -190,7 +177,6 @@
 <li class="toctree-l2"><a class="reference internal" href="architecture.html#design-principles">Design Principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="architecture.html#code-structure">Code Structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="architecture.html#build-system">Build System</a></li>
-<li class="toctree-l2"><a class="reference internal" href="architecture.html#threading-model">Threading Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="architecture.html#performance-considerations">Performance Considerations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="architecture.html#extending-smart">Extending SMART</a></li>
 <li class="toctree-l2"><a class="reference internal" href="architecture.html#next-steps">Next Steps</a></li>
@@ -218,12 +204,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="who_is_using.html">Who is Using SMART?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="who_is_using.html#research-projects">Research Projects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="who_is_using.html#academic-institutions">Academic Institutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="who_is_using.html#public-references">Public References</a></li>
 <li class="toctree-l2"><a class="reference internal" href="who_is_using.html#publications-using-smart">Publications Using SMART</a></li>
-<li class="toctree-l2"><a class="reference internal" href="who_is_using.html#industry-applications">Industry Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="who_is_using.html#open-source-projects">Open Source Projects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="who_is_using.html#community-contributions">Community Contributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="who_is_using.html#feature-your-project">Feature Your Project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="who_is_using.html#required-information">Required Information</a></li>
 </ul>
@@ -247,9 +229,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Core APIs</li>
+      <li class="breadcrumb-item active">Interfaces and Outputs</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/smart-mapf/smart/blob/main/docs/smart/apis.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/smart-mapf/smart/blob/master/docs/smart/apis.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -257,245 +239,112 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="core-apis">
-<h1>Core APIs<a class="headerlink" href="#core-apis" title="Link to this heading"></a></h1>
-<p>SMART provides Python APIs for interacting with the simulator and integrating
-MAPF planners.</p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>The SMART APIs allow you to:</p>
+  <section id="interfaces-and-outputs">
+<h1>Interfaces and Outputs<a class="headerlink" href="#interfaces-and-outputs" title="Link to this heading"></a></h1>
+<p>The current public SMART repository does <strong>not</strong> ship a packaged public Python
+client library such as <code class="docutils literal notranslate"><span class="pre">SMARTClient</span></code>. The supported user-facing interface in
+the repository is the command-line workflow built around <code class="docutils literal notranslate"><span class="pre">run_sim.py</span></code>, text
+input files, and the generated output files.</p>
+<section id="public-entry-point">
+<h2>Public Entry Point<a class="headerlink" href="#public-entry-point" title="Link to this heading"></a></h2>
+<p>The main entry point is <code class="docutils literal notranslate"><span class="pre">run_sim.py</span></code> in the source repository root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>run_sim.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--map_name<span class="o">=</span>random-32-32-20.map<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--scen_name<span class="o">=</span>random-32-32-20-random-1.scen<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num_agents<span class="o">=</span><span class="m">50</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--path_filename<span class="o">=</span>example_paths_xy.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--flip_coord<span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+<p>Current command-line arguments from <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">run_sim.py</span> <span class="pre">--help</span></code>:</p>
 <ul class="simple">
-<li><p>Start and control simulations programmatically</p></li>
-<li><p>Integrate custom MAPF planners</p></li>
-<li><p>Retrieve real-time execution statistics</p></li>
-<li><p>Monitor agent states and positions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--map_name</span></code> - input map file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--scen_name</span></code> - input scenario file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--num_agents</span></code> - number of agents to load from the scenario</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--headless</span></code> - whether to disable ARGoS visualization</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--argos_config_name</span></code> - generated ARGoS config filename</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--path_filename</span></code> - input path file for the MAPF plan</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--stats_name</span></code> - output CSV filename for simulation statistics</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--port_num</span></code> - RPC port shared by the server and robot executors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--flip_coord</span></code> - coordinate convention flag, <code class="docutils literal notranslate"><span class="pre">0</span></code> for <code class="docutils literal notranslate"><span class="pre">(x,y)</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code> for <code class="docutils literal notranslate"><span class="pre">(y,x)</span></code></p></li>
 </ul>
 </section>
-<section id="client-server-architecture">
-<h2>Client-Server Architecture<a class="headerlink" href="#client-server-architecture" title="Link to this heading"></a></h2>
-<p>SMART uses an RPC-based client-server architecture:</p>
+<section id="what-run-sim-py-does">
+<h2>What <code class="docutils literal notranslate"><span class="pre">run_sim.py</span></code> Does<a class="headerlink" href="#what-run-sim-py-does" title="Link to this heading"></a></h2>
+<p>For each run, <code class="docutils literal notranslate"><span class="pre">run_sim.py</span></code>:</p>
+<ol class="arabic simple">
+<li><p>Reads the <cite>.map</cite> and <cite>.scen</cite> files.</p></li>
+<li><p>Generates an ARGoS configuration file through <code class="docutils literal notranslate"><span class="pre">ArgosConfig/</span></code>.</p></li>
+<li><p>Starts <code class="docutils literal notranslate"><span class="pre">build/server/ADG_server</span></code> with the selected path file.</p></li>
+<li><p>Starts <code class="docutils literal notranslate"><span class="pre">argos3</span></code> with the generated <code class="docutils literal notranslate"><span class="pre">.argos</span></code> file.</p></li>
+</ol>
+</section>
+<section id="public-outputs">
+<h2>Public Outputs<a class="headerlink" href="#public-outputs" title="Link to this heading"></a></h2>
+<p>The current repo produces three main kinds of outputs:</p>
 <ul class="simple">
-<li><p><strong>Server</strong> - C++ ARGoS-based simulator (<code class="docutils literal notranslate"><span class="pre">ADG_server</span></code>)</p></li>
-<li><p><strong>Client</strong> - Python scripts communicate via RPC</p></li>
-<li><p><strong>Port</strong> - Default 8182 (configurable)</p></li>
+<li><p>A generated ARGoS XML file, <code class="docutils literal notranslate"><span class="pre">output.argos</span></code> by default</p></li>
+<li><p>A CSV file, <code class="docutils literal notranslate"><span class="pre">stats.csv</span></code> by default</p></li>
+<li><p>A JSON summary printed by <code class="docutils literal notranslate"><span class="pre">ADG_server</span></code> to standard output at the end of the run</p></li>
 </ul>
-</section>
-<section id="python-api-reference">
-<h2>Python API Reference<a class="headerlink" href="#python-api-reference" title="Link to this heading"></a></h2>
-<p><strong>Basic Usage</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">smart_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMARTClient</span>
-
-<span class="c1"># Connect to SMART server</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">SMARTClient</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">8182</span><span class="p">)</span>
-
-<span class="c1"># Load simulation</span>
-<span class="n">client</span><span class="o">.</span><span class="n">load_simulation</span><span class="p">(</span>
-    <span class="n">map_file</span><span class="o">=</span><span class="s2">&quot;random-32-32-20.map&quot;</span><span class="p">,</span>
-    <span class="n">scenario_file</span><span class="o">=</span><span class="s2">&quot;random-32-32-20-random-1.scen&quot;</span><span class="p">,</span>
-    <span class="n">num_agents</span><span class="o">=</span><span class="mi">50</span>
-<span class="p">)</span>
-
-<span class="c1"># Set paths from your planner</span>
-<span class="n">client</span><span class="o">.</span><span class="n">set_paths</span><span class="p">(</span><span class="n">agent_paths</span><span class="p">)</span>
-
-<span class="c1"># Run simulation</span>
-<span class="n">stats</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-
-<span class="c1"># Get results</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Makespan: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;makespan&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Throughput: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;throughput&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<p>The CSV header written by the current server implementation is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>steps finish sim,sum of steps finish sim,time finish sim,sum finish time,original plan cost,#type-2 edges,#type-1 edges,#Nodes,#Move,#Rotate,#Consecutive Move,#Agent pair,instance name,number of agent
 </pre></div>
 </div>
-<p><strong>SMARTClient Class</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SMARTClient</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Main client interface for SMART simulator.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8182</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initialize client connection.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            host: Server hostname</span>
-<span class="sd">            port: Server port number</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">load_simulation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">map_file</span><span class="p">,</span> <span class="n">scenario_file</span><span class="p">,</span> <span class="n">num_agents</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Load a simulation scenario.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            map_file: Path to .map file</span>
-<span class="sd">            scenario_file: Path to .scen file</span>
-<span class="sd">            num_agents: Number of agents</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">paths</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set planned paths for agents.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            paths: List of paths, one per agent</span>
-<span class="sd">                  Format: [[(x,y,t), (x,y,t), ...], ...]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headless</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Execute the simulation.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            headless: Run without visualization</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            dict: Statistics including makespan, costs, delays</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_agent_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent_id</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get current state of an agent.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            agent_id: Agent identifier</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            dict: Position, velocity, status</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">pause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Pause the simulation.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">resume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resume the simulation.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop and cleanup the simulation.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
+<p>The JSON summary contains the same main fields plus several time values in
+seconds:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>steps finish sim
+sum of steps finish sim
+time finish sim
+sum finish time
+original plan cost
+simulated makespan seconds
+simulated sum of cost seconds
+simulated average sum of cost seconds
+#type-2 edges
+#type-1 edges
+#Nodes
+#Move
+#Rotate
+#Consecutive Move
+#Agent pair
+instance name
+number of agent
 </pre></div>
 </div>
 </section>
-<section id="path-format">
-<h2>Path Format<a class="headerlink" href="#path-format" title="Link to this heading"></a></h2>
-<p>Paths should be provided as a list of waypoint tuples:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Single agent path</span>
-<span class="n">path</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>   <span class="c1"># (x, y, timestep)</span>
-    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="c1"># ... goal</span>
-<span class="p">]</span>
-
-<span class="c1"># Multiple agents</span>
-<span class="n">all_paths</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">[(</span><span class="mi">5</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="o">...</span><span class="p">],</span>  <span class="c1"># Agent 0</span>
-    <span class="p">[(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="o">...</span><span class="p">],</span>  <span class="c1"># Agent 1</span>
-    <span class="c1"># ...</span>
-<span class="p">]</span>
-
-<span class="n">client</span><span class="o">.</span><span class="n">set_paths</span><span class="p">(</span><span class="n">all_paths</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="statistics-output">
-<h2>Statistics Output<a class="headerlink" href="#statistics-output" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">run()</span></code> method returns a dictionary with execution statistics:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-
-<span class="c1"># Access statistics</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Makespan: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;makespan&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sum of costs: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;sum_of_costs&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Throughput: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;throughput&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success rate: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;success_rate&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Per-agent statistics</span>
-<span class="k">for</span> <span class="n">agent_id</span><span class="p">,</span> <span class="n">agent_stats</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;agents&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Agent </span><span class="si">{</span><span class="n">agent_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">agent_stats</span><span class="p">[</span><span class="s1">&#39;delays&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> delays&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Return format:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s1">&#39;makespan&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>           <span class="c1"># Maximum completion time</span>
-    <span class="s1">&#39;sum_of_costs&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>       <span class="c1"># Total path costs</span>
-    <span class="s1">&#39;throughput&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>       <span class="c1"># Agents/second</span>
-    <span class="s1">&#39;success_rate&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>     <span class="c1"># Fraction reaching goal</span>
-    <span class="s1">&#39;agents&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="mi">0</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;makespan&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="s1">&#39;cost&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="s1">&#39;delays&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="s1">&#39;collisions&#39;</span><span class="p">:</span> <span class="nb">int</span>
-        <span class="p">},</span>
-        <span class="c1"># ...</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="configuration-api">
-<h2>Configuration API<a class="headerlink" href="#configuration-api" title="Link to this heading"></a></h2>
-<p>Customize simulation parameters:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">set_config</span><span class="p">({</span>
-    <span class="s1">&#39;robot_radius&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>        <span class="c1"># Robot size (meters)</span>
-    <span class="s1">&#39;max_velocity&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>        <span class="c1"># Max speed (m/s)</span>
-    <span class="s1">&#39;time_limit&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>         <span class="c1"># Simulation time limit</span>
-    <span class="s1">&#39;collision_threshold&#39;</span><span class="p">:</span> <span class="mf">0.1</span>  <span class="c1"># Collision distance</span>
-<span class="p">})</span>
-</pre></div>
-</div>
-</section>
-<section id="event-callbacks">
-<h2>Event Callbacks<a class="headerlink" href="#event-callbacks" title="Link to this heading"></a></h2>
-<p>Register callbacks for simulation events:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">on_collision</span><span class="p">(</span><span class="n">agent_a</span><span class="p">,</span> <span class="n">agent_b</span><span class="p">,</span> <span class="n">timestep</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collision: Agent </span><span class="si">{</span><span class="n">agent_a</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">agent_b</span><span class="si">}</span><span class="s2"> at t=</span><span class="si">{</span><span class="n">timestep</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">on_delay</span><span class="p">(</span><span class="n">agent_id</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">delay_time</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Agent </span><span class="si">{</span><span class="n">agent_id</span><span class="si">}</span><span class="s2"> delayed at </span><span class="si">{</span><span class="n">location</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="n">client</span><span class="o">.</span><span class="n">register_callback</span><span class="p">(</span><span class="s1">&#39;collision&#39;</span><span class="p">,</span> <span class="n">on_collision</span><span class="p">)</span>
-<span class="n">client</span><span class="o">.</span><span class="n">register_callback</span><span class="p">(</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span> <span class="n">on_delay</span><span class="p">)</span>
-
-<span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</pre></div>
-</div>
-</section>
-<section id="rpc-protocol">
-<h2>RPC Protocol<a class="headerlink" href="#rpc-protocol" title="Link to this heading"></a></h2>
-<p>For advanced users implementing custom clients, SMART uses rpclib with the
-following RPC methods:</p>
+<section id="internal-rpc-layer">
+<h2>Internal RPC Layer<a class="headerlink" href="#internal-rpc-layer" title="Link to this heading"></a></h2>
+<p>SMART uses <code class="docutils literal notranslate"><span class="pre">rpclib</span></code> internally between the ADG server and the robot
+executors. In the current public code, the server binds the following methods:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">load_scenario(map,</span> <span class="pre">scen,</span> <span class="pre">num_agents)</span></code> - Load simulation</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">set_agent_paths(paths_json)</span></code> - Set paths</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">run_simulation(headless)</span></code> - Execute</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">get_statistics()</span></code> - Retrieve results</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pause_simulation()</span></code> - Pause</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">resume_simulation()</span></code> - Resume</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">init</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">update</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">receive_update</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_config</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">update_finish_agent</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">closeServer</span></code></p></li>
 </ul>
-<p>See the <a class="reference external" href="https://github.com/rpclib/rpclib">rpclib documentation</a> for details.</p>
+<p>These RPC calls are implementation details of the shipped controller/server
+pair. They are useful for code readers, but they are not documented as a
+stable public client API.</p>
 </section>
-<section id="example-scripts">
-<h2>Example Scripts<a class="headerlink" href="#example-scripts" title="Link to this heading"></a></h2>
-<p>Complete examples are available in the repository:</p>
+<section id="what-is-not-in-the-public-repo">
+<h2>What Is Not in the Public Repo<a class="headerlink" href="#what-is-not-in-the-public-repo" title="Link to this heading"></a></h2>
+<p>The current public repository does not include:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">examples/simple_client.py</span></code> - Basic API usage</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">examples/batch_experiment.py</span></code> - Run multiple scenarios</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">examples/custom_planner.py</span></code> - Integrate a MAPF planner</p></li>
+<li><p>a packaged <code class="docutils literal notranslate"><span class="pre">smart_client</span></code> Python module</p></li>
+<li><p>a public pause/resume callback API</p></li>
+<li><p>a documented JSON or REST control layer</p></li>
+<li><p>bundled example scripts named <code class="docutils literal notranslate"><span class="pre">simple_client.py</span></code> or <code class="docutils literal notranslate"><span class="pre">batch_experiment.py</span></code></p></li>
 </ul>
 </section>
 <section id="next-steps">
 <h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="planner_integration.html"><span class="doc">Planner Integration</span></a> - Integrate your MAPF algorithm</p></li>
-<li><p><a class="reference internal" href="examples.html"><span class="doc">Examples</span></a> - Complete examples</p></li>
-<li><p><a class="reference internal" href="usage.html"><span class="doc">Usage Guide</span></a> - Command-line usage</p></li>
+<li><p><a class="reference internal" href="planner_integration.html"><span class="doc">Planner Integration</span></a> - prepare planner outputs for SMART</p></li>
+<li><p><a class="reference internal" href="usage.html"><span class="doc">Usage Guide</span></a> - run the full workflow from source</p></li>
+<li><p><a class="reference internal" href="input_formats.html"><span class="doc">Input Formats</span></a> - format maps, scenarios, and path files correctly</p></li>
 </ul>
 </section>
 </section>

@@ -1,17 +1,19 @@
 Usage Guide
 ===========
 
-This guide provides detailed information on using SMART for MAPF research and experiments.
+This guide describes the public end-to-end workflow exposed by the current
+SMART repository.
 
 Overview
 --------
 
 SMART provides a complete pipeline for evaluating MAPF algorithms:
 
-1. **Plan generation** - Your MAPF algorithm generates paths
-2. **Simulation** - ARGoS simulates realistic robot execution
-3. **Monitoring** - Action Dependency Graph tracks execution
-4. **Analysis** - Collect statistics on throughput, delays, collisions
+1. **Plan generation** - your MAPF algorithm generates a timed path file
+2. **Simulation setup** - ``run_sim.py`` converts the map and scenario into an ARGoS config
+3. **Execution monitoring** - ``ADG_server`` coordinates robot actions through the ADG
+4. **Simulation** - ARGoS executes the controllers
+5. **Analysis** - SMART writes a CSV row and prints a JSON summary
 
 Basic Workflow
 --------------
@@ -19,10 +21,10 @@ Basic Workflow
 The typical SMART workflow consists of:
 
 1. Prepare a map file (`.map` format)
-2. Create a scenario file (`.scen` format) with start/goal positions
-3. Run your MAPF planner to generate paths
+2. Prepare a scenario file (`.scen` format)
+3. Run your MAPF planner to generate a path file
 4. Execute the simulation with SMART
-5. Analyze the results
+5. Analyze the generated outputs
 
 Command Line Interface
 ----------------------
@@ -38,42 +40,40 @@ The main entry point is ``run_sim.py``:
        --path_filename=paths.txt \
        --flip_coord=0
 
-**Key Arguments:**
+**Key arguments:**
 
-* ``--map_name`` - Map file to use (`.map` format)
-* ``--scen_name`` - Scenario file with start/goal positions
-* ``--num_agents`` - Number of agents to simulate
-* ``--path_filename`` - Input path file from your planner
-* ``--flip_coord`` - Coordinate system (0=xy, 1=yx)
-* ``--headless`` - Run without visualization (default: False)
-* ``--port_num`` - RPC port number (default: 8182)
-* ``--stats_name`` - Output statistics CSV file
+* ``--map_name`` - map file to use (`.map` format)
+* ``--scen_name`` - scenario file with start/goal positions
+* ``--num_agents`` - number of agents to simulate
+* ``--path_filename`` - input path file from your planner
+* ``--flip_coord`` - coordinate system (0=xy, 1=yx)
+* ``--headless`` - run without visualization
+* ``--port_num`` - RPC port number
+* ``--stats_name`` - output statistics CSV file
+* ``--argos_config_name`` - filename of the generated ARGoS config
 
 Visualization Mode
 ------------------
 
-Run with visualization to observe the simulation in real-time:
+Use the shipped example files from the source repository to observe a run with
+visualization:
 
 .. code-block:: bash
 
    python run_sim.py \
-       --map_name=empty-32-32.map \
-       --scen_name=empty-32-32-random-1.scen \
-       --num_agents=20 \
-       --path_filename=my_paths.txt
+       --map_name=random-32-32-20.map \
+       --scen_name=random-32-32-20-random-1.scen \
+       --num_agents=50 \
+       --path_filename=example_paths_xy.txt \
+       --flip_coord=0
 
 The ARGoS visualizer will open showing:
 
-* Robot movements in real-time
-* Collision detection
-* Path following behavior
+* robot movements in real time
+* obstacles derived from the input map
+* path execution under the shipped foot-bot controller
 
-**Controls:**
-
-* Mouse - Rotate camera
-* Arrow keys - Move camera
-* Spacebar - Pause/resume
-* F10 - Toggle fast forward
+The exact viewer controls come from ARGoS itself.
 
 Headless Mode
 -------------
@@ -83,18 +83,20 @@ For batch experiments and benchmarking, run in headless mode:
 .. code-block:: bash
 
    python run_sim.py \
-       --map_name=random-64-64-20.map \
-       --scen_name=random-64-64-20-random-1.scen \
-       --num_agents=100 \
-       --path_filename=paths.txt \
+       --map_name=random-32-32-20.map \
+       --scen_name=random-32-32-20-random-1.scen \
+       --num_agents=50 \
+       --path_filename=example_paths_xy.txt \
+       --flip_coord=0 \
        --headless=True \
        --stats_name=experiment_1.csv
 
 Headless mode:
 
-* Runs faster (no rendering overhead)
-* Suitable for automated experiments
-* Outputs statistics to CSV
+* runs faster because rendering is disabled
+* is suitable for automated experiments
+* still generates an ARGoS config file
+* appends one line to the selected CSV file
 
 Path File Format
 ----------------
@@ -108,9 +110,10 @@ The path file contains trajectories for each agent:
 
 Format: ``Agent ID:(x,y,t)->(x,y,t)->...``
 
-* ``(x,y,t)`` - Position (x, y) at timestep t
-* Paths should be collision-free in discrete time
-* SMART adds realistic execution uncertainty
+* ``(x,y,t)`` - position and timestamp
+* one line per agent
+* consecutive locations should be waits or axis-adjacent moves
+* the file should contain the same number of agent paths as the run
 
 Coordinate Systems
 ------------------
@@ -119,19 +122,19 @@ SMART supports two coordinate conventions:
 
 **XY format** (``--flip_coord=0``):
 
-* Standard (x, y) coordinates
-* x increases rightward, y increases upward
+* standard ``(x, y)`` coordinates
+* x is the map column, y is the map row
 
 **YX format** (``--flip_coord=1``):
 
-* Used by some MAPF planners
-* Row-column format
-* Automatically converted internally
+* row-column format used by some planners
+* ``(y, x)`` ordering in the path file
+* converted internally by SMART
 
 Output Statistics
 -----------------
 
-SMART generates a CSV file with execution statistics:
+SMART appends a CSV row with the following header:
 
 .. code-block:: text
 
@@ -139,27 +142,40 @@ SMART generates a CSV file with execution statistics:
 
 **Metrics:**
 
-* ``steps finish sim`` - Number of simulation steps completed
-* ``sum of steps finish sim`` - Sum of per-agent completed simulation steps
-* ``time finish sim`` - Wall-clock time to finish simulation
-* ``sum finish time`` - Sum of per-agent finish times
-* ``original plan cost`` - Cost of the input planner solution
-* ``#type-2 edges`` - Count of type-2 edges in the execution graph
-* ``#type-1 edges`` - Count of type-1 edges in the execution graph
-* ``#Nodes`` - Number of nodes in the execution graph
-* ``#Move`` - Number of move actions
-* ``#Rotate`` - Number of rotate actions
-* ``#Consecutive Move`` - Number of consecutive move patterns
-* ``#Agent pair`` - Number of interacting agent pairs
-* ``instance name`` - Input instance/path file name
-* ``number of agent`` - Number of agents in the run
+* ``steps finish sim`` - number of simulation steps completed
+* ``sum of steps finish sim`` - sum of per-agent completion steps
+* ``time finish sim`` - maximum wall-clock finish time
+* ``sum finish time`` - sum of per-agent finish times
+* ``original plan cost`` - cost read from the input plan
+* ``#type-2 edges`` - number of type-2 ADG edges
+* ``#type-1 edges`` - number of type-1 ADG edges
+* ``#Nodes`` - number of ADG nodes
+* ``#Move`` - number of move actions
+* ``#Rotate`` - number of rotate actions
+* ``#Consecutive Move`` - number of consecutive move sequences
+* ``#Agent pair`` - number of interacting agent pairs
+* ``instance name`` - path filename
+* ``number of agent`` - number of agents in the run
+
+At the end of a run, the server also prints a JSON summary containing the same
+main fields plus several time values in seconds.
+
+Generated Files
+---------------
+
+By default, the helper script creates:
+
+* ``output.argos`` - generated ARGoS XML
+* ``stats.csv`` - simulation statistics
+
+You can rename these with ``--argos_config_name`` and ``--stats_name``.
 
 Configuration Files
 -------------------
 
-ARGoS configuration is generated automatically. To customize:
+ARGoS configuration is generated automatically. To customize it:
 
-1. Run once to generate ``.argos`` file
+1. Run once to generate the ``.argos`` file
 2. Edit the configuration:
 
 .. code-block:: bash
@@ -172,14 +188,14 @@ ARGoS configuration is generated automatically. To customize:
 
    argos3 -c output.argos
 
-See :doc:`settings` for advanced configuration options.
+See :doc:`settings` for configuration details.
 
 Map and Scenario Files
 ----------------------
 
-**Map Format** (`.map` extension):
+**Map format** (`.map` extension):
 
-MovingAI format used by MAPF benchmarks:
+MovingAI-style text grid:
 
 .. code-block:: text
 
@@ -189,12 +205,8 @@ MovingAI format used by MAPF benchmarks:
    map
    @@@@@@@@...
    @......@...
-   ...
 
-* ``@`` - Obstacle
-* ``.`` - Free space
-
-**Scenario Format** (`.scen` extension):
+**Scenario format** (`.scen` extension):
 
 .. code-block:: text
 
@@ -208,6 +220,6 @@ Next Steps
 ----------
 
 * :doc:`examples` - Walkthrough examples
-* :doc:`apis` - Python API reference
+* :doc:`apis` - Public interfaces and outputs
 * :doc:`planner_integration` - Integrate your planner
-* :doc:`settings` - Advanced configuration
+* :doc:`settings` - Configuration details

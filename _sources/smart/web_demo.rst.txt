@@ -1,200 +1,132 @@
 Web Demo Tutorial
 =================
 
-SMART provides an interactive web-based demonstration at https://smart-mapf.github.io/demo/ 
-where you can visualize multi-agent path finding in real-time without any installation.
+SMART provides a public interactive demonstration at
+https://smart-mapf.github.io/demo/ where you can explore SMART in the browser.
+
+This page intentionally describes only behavior that is visible in the current
+public demo bundle.
 
 Overview
 --------
 
-The web demo allows you to:
+The current demo exposes:
 
-* Visualize pre-computed MAPF solutions
-* See realistic execution with robot dynamics
-* Compare planned paths vs actual execution
-* Observe delays, collisions, and coordination
-* Experiment with different scenarios and algorithms
+* bundled example maps
+* map/scenario/path file inputs
+* a **Simulate** action
+* playback controls including **Time** and **Speed**
+* robot selection details
+* a **Statistics** panel that shows **Sum of costs**, **Makespan**, and **Average time**
 
 Accessing the Demo
 ------------------
 
 Visit: https://smart-mapf.github.io/demo/
 
-The demo runs entirely in your web browser - no downloads or installation required.
+The demo runs entirely in the browser.
 
 Interface Layout
 ----------------
 
-The web interface consists of several main components:
+The current UI includes several named panels:
 
-**Visualization Area**
-   The central canvas showing:
-   
-   * Map environment
-   * Robots
-   * Obstacles (white cubes)
+* **Examples** - bundled demo scenarios
+* **Input** - map, scenario, and plan/path file inputs
+* **Run** - simulation start controls
+* **Playback** - time and speed controls
+* **Selection** - details for selected robots
+* **Statistics** - summary metrics after a run
 
-**Control Panel**
-   Located on the left side:
-   
-   * Example scenario selection
-   * Scenario selection dropdown
-   * Playback controls (play/pause/reset)
-   * Speed slider
-   * Statistics display
+Bundled Example Maps
+--------------------
 
+The current public bundle includes example maps for:
 
-Getting Started
----------------
+* ``den312d``
+* ``empty-32-32``
+* ``maze-32-32-4``
+* ``random-64-64-10``
+* ``room-64-64-16``
+* ``warehouse-10-20-10-2-1``
 
-**Step 1: Select a Map and Plan**
+Using Bundled Examples
+----------------------
 
-1. At the **Input** menu
-2. Choose the map file from local disk
-3. Choose the scenario file from local disk (indicating start/goal positions)
-4. Choose the MAPF plan file from local disk (pre-computed solution)
+1. Open the demo.
+2. In the **Examples** panel, open one of the bundled examples.
+3. In the **Run** panel, click **Simulate**.
+4. Use the **Playback** controls to adjust **Time** and **Speed**.
 
-**Step 2: Load**
+Using Your Own Files
+--------------------
 
-1. At the **Run** menu
-2. Click **Simulate** ▶ to start the simulation
+The current bundle also exposes file inputs for:
 
+* **Map**
+* **Scenario**
+* **Plan/Path**
 
-**Step 3: Play**
+To try custom data:
 
-1. At the **Playback** menu
-2. Toggle the **Time** and **Playback speed** buttons to control the simulation
+1. Open the **Input** panel.
+2. Upload a `.map` file.
+3. Upload a matching `.scen` file.
+4. Upload a path file.
+5. Start the run with **Simulate**.
 
-Understanding the Visualization
---------------------------------
+Playback
+--------
 
-**Robot Representation**
+The current public demo exposes:
 
-* **Size** - Represents the robot's physical footprint
-* **Opacity** - Faded robots have reached their goals
-
-**Path Visualization**
-
-* **Thin colored lines** - Planned paths from the MAPF algorithm
-* **Thick colored lines** - Actual executed trajectories
-* **Dotted lines** - Future planned waypoints
-* **Solid lines** - Completed path segments
-
-**Map Elements**
-
-* **White cubes** - Obstacles (impassable)
-
-
-**Execution Indicators**
-
-* **Green glow** - Agent is on schedule
-* **Yellow glow** - Minor delay detected
-* **Red glow** - Collision or significant delay
-* **Pulsing** - Agent is actively coordinating with neighbors
-
-Playback Controls
------------------
-
-**Speed Control**
-
-Use the speed slider to adjust playback rate:
-
-* **0.25×** - Slow motion (see detailed movements)
-* **1×** - Real-time speed
-* **2×** - 2× speed
-* **4×** - Fast forward
-* **10×** - Very fast (for long simulations)
-
-**Timeline Navigation**
-
-* Click anywhere on the timeline to jump to that timestep
-* Drag the timeline slider for precise control
-* Use arrow keys (← →) for frame-by-frame stepping
-
-**Camera Controls**
-
-* **Mouse wheel** - Zoom in/out
-* **Click and drag** - Pan the view
+* a **Time** control
+* a **Speed** control
+* an interactive 3D visualization window
 
 Statistics Panel
 ----------------
 
-The statistics panel shows real-time metrics:
+After a simulation finishes, the current **Statistics** panel shows:
 
-**Planning Metrics**
+* **Sum of costs**
+* **Makespan**
+* **Average time**
 
-* **Makespan** - Maximum time any agent takes
-* **Sum of Costs** - Total path lengths for all agents
-* **Planning Time** - Time to compute the solution
-
-**Execution Metrics**
-
-* **Current Time** - Current simulation timestep
-* **Completed Agents** - Number of agents that reached goals
-* **Active Agents** - Agents still moving
-* **Total Delays** - Cumulative delay across all agents
-* **Collision Count** - Number of detected collisions
-
-**Per-Agent Stats**
-
-Click on any robot to see individual statistics:
-
-* Agent ID and color
-* Start and goal positions
-* Planned vs actual path length
-* Current position and velocity
-* Delays encountered
-* Goal completion time
+Before the run ends, the panel shows a placeholder message rather than final
+numbers.
 
 Interactive Features
 --------------------
 
-**Agent Selection**
+The current public demo supports robot selection. When you select robots, the
+**Selection** panel shows per-robot details such as:
 
-* **Click** on a robot to select and highlight it
-* Selected agent's path is emphasized
-* Statistics for selected agent appear in the side panel
-* Press **ESC** to deselect
-
-
-Export and Share
-----------------
-
-**Screenshot**
-
-* Click **Screenshot** 📷 button
-* Saves current visualization as PNG
-* Useful for presentations or reports
-
-**Export Statistics**
-
-* Click **Export Stats** 📊 button
-* Downloads CSV file with detailed metrics
-* Import into Excel, Python, or other tools for analysis
-
+* position
+* rotation
+* completion progress
+* a small progress sparkline
 
 Next Steps
 ----------
 
 After exploring the web demo:
 
-1. **Install SMART** - :doc:`installation` for full features
-2. **Create scenarios** - :doc:`input_formats` for custom maps
-3. **Integrate planners** - :doc:`planner_integration` for your algorithm
-4. **Run experiments** - :doc:`usage` for batch evaluation
+1. **Install SMART** - :doc:`installation`
+2. **Create scenarios** - :doc:`input_formats`
+3. **Integrate planners** - :doc:`planner_integration`
+4. **Run experiments** - :doc:`usage`
 
 **Questions or Issues?**
 
 * Check the :doc:`faq` for common questions
-* Visit https://github.com/smart-mapf/smart for documentation
+* Visit https://github.com/smart-mapf/smart for the source repository
 * Open an issue on GitHub for bugs or feature requests
 
 Try It Now
 ----------
 
-Ready to explore? Visit the demo:
-
 👉 **https://smart-mapf.github.io/demo/**
 
-Experiment with different scenarios, algorithms, and agent counts to understand
-how MAPF algorithms perform in realistic execution environments!
+Try the bundled examples first, then upload your own map/scenario/path triplet
+if you want to compare custom plans.

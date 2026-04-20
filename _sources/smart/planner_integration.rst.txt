@@ -1,199 +1,90 @@
 Planner Integration
 ===================
 
-This guide shows how to integrate your MAPF planner with SMART.
+This guide shows how to integrate your MAPF planner with the current public
+SMART workflow.
 
 Overview
 --------
 
-SMART is designed to work with any MAPF planner that produces timestamped paths.
-The integration process:
+In the public repository, planner integration is file-based:
 
-1. Run your planner on a map/scenario
-2. Convert output to SMART path format
-3. Execute in SMART simulator
-4. Analyze results
+1. Run your planner on a `.map` and `.scen` instance.
+2. Write the resulting paths to a SMART path file.
+3. Pass that path file to ``run_sim.py``.
+4. Read the generated CSV or JSON summary.
 
 Planner Output Format
 ---------------------
 
-Your MAPF planner should output paths in the following formats:
+The path file format consumed by SMART is a plain-text file with one agent per
+line:
 
 .. code-block:: text
 
    Agent 0:(5,16,0)->(5,17,1)->(5,18,2)->(6,18,3)->...
    Agent 1:(10,5,0)->(11,5,1)->(12,5,2)->...
 
-
+Each tuple is ``(x,y,t)`` or ``(y,x,t)`` depending on the ``--flip_coord``
+flag you use when launching SMART.
 
 Integration Template
 --------------------
 
-Create a wrapper script for your planner:
+The simplest integration path is:
+
+1. run your planner,
+2. write a SMART path file,
+3. call ``run_sim.py``.
+
+Example wrapper:
 
 .. code-block:: python
 
    # my_planner_wrapper.py
-   
+
    import subprocess
-   import json
-   from smart_client import SMARTClient
-   
+
+   def write_smart_paths(paths, output_file):
+       with open(output_file, "w") as f:
+           for agent_id, agent_path in enumerate(paths):
+               tuples = "->".join(
+                   f"({x},{y},{t})" for x, y, t in agent_path
+               )
+               f.write(f"Agent {agent_id}:{tuples}->\\n")
+
    def run_my_planner(map_file, scen_file, num_agents):
-       """
-       Run your MAPF planner.
-       
-       Returns:
-           List of paths for each agent
-       """
-       # Call your planner executable
-       result = subprocess.run([
-           './my_planner',
-           '--map', map_file,
-           '--scen', scen_file,
-           '--agents', str(num_agents),
-           '--output', 'paths.json'
-       ], capture_output=True)
-       
-       # Parse planner output
-       with open('paths.json') as f:
-           planner_output = json.load(f)
-       
-       # Convert to SMART format
-       paths = convert_to_smart_format(planner_output)
-       return paths
-   
-   def convert_to_smart_format(planner_output):
-       """
-       Convert your planner's output to SMART format.
-       """
-       paths = []
-       for agent in planner_output['agents']:
-           path = []
-           for waypoint in agent['path']:
-               x, y, t = waypoint
-               path.append((x, y, t))
-           paths.append(path)
-       return paths
-   
-   def evaluate_planner(map_file, scen_file, num_agents):
-       """
-       Run planner and evaluate in SMART.
-       """
-       # Run your planner
-       print(f"Running planner on {num_agents} agents...")
+       # Replace this with your real planner call.
+       # Return one path per agent as a list of (x, y, t) tuples.
+       raise NotImplementedError
+
+   def evaluate_with_smart(map_file, scen_file, num_agents):
+       path_file = "planner_paths.txt"
        paths = run_my_planner(map_file, scen_file, num_agents)
-       
-       # Connect to SMART
-       client = SMARTClient(port=8182)
-       client.load_simulation(map_file, scen_file, num_agents)
-       client.set_paths(paths)
-       
-       # Run simulation
-       print("Executing in SMART simulator...")
-       stats = client.run(headless=True)
-       
-       # Print results
-       print(f"Makespan: {stats['makespan']}")
-       print(f"Success rate: {stats['success_rate']}")
-       print(f"Throughput: {stats['throughput']:.2f} agents/sec")
-       
-       return stats
-   
-   if __name__ == '__main__':
-       stats = evaluate_planner(
-           'random-32-32-20.map',
-           'random-32-32-20-random-1.scen',
-           50
+       write_smart_paths(paths, path_file)
+
+       subprocess.run(
+           [
+               "python",
+               "run_sim.py",
+               f"--map_name={map_file}",
+               f"--scen_name={scen_file}",
+               f"--num_agents={num_agents}",
+               f"--path_filename={path_file}",
+               "--flip_coord=0",
+               "--headless=True",
+               "--stats_name=planner_eval.csv",
+           ],
+           check=True,
        )
 
-Common Planners
----------------
-
-**CBS (Conflict-Based Search)**
-
-.. code-block:: python
-
-   # Assuming CBS outputs paths as list of lists
-   def convert_cbs_output(cbs_paths):
-       smart_paths = []
-       for agent_path in cbs_paths:
-           timestamped = []
-           for t, (x, y) in enumerate(agent_path):
-               timestamped.append((x, y, t))
-           smart_paths.append(timestamped)
-       return smart_paths
-
-**EECBS (Enhanced CBS)**
-
-.. code-block:: python
-
-   from eecbs import EECBS
-   
-   # Run EECBS
-   eecbs = EECBS()
-   solution = eecbs.solve(map_file, scen_file, num_agents)
-   
-   # Convert to SMART format
-   paths = []
-   for agent_id, agent_solution in enumerate(solution):
-       path = [(x, y, t) for t, (x, y) in enumerate(agent_solution)]
-       paths.append(path)
-
-**MAPF-LNS (Large Neighborhood Search)**
-
-.. code-block:: python
-
-   from mapf_lns import MAPFLNS
-   
-   lns = MAPFLNS()
-   solution = lns.solve(
-       map_file=map_file,
-       scen_file=scen_file,
-       num_agents=num_agents,
-       time_limit=60
-   )
-   
-   # Already in correct format
-   paths = solution['paths']
-
-Batch Evaluation
-----------------
-
-Evaluate your planner across multiple scenarios:
-
-.. code-block:: python
-
-   import pandas as pd
-   
-   scenarios = [
-       ('random-32-32-20.map', 'random-32-32-20-random-1.scen', 50),
-       ('random-32-32-20.map', 'random-32-32-20-random-2.scen', 100),
-       ('maze-32-32-4.map', 'maze-32-32-4-random-1.scen', 50),
-   ]
-   
-   results = []
-   for map_file, scen_file, num_agents in scenarios:
-       print(f"\\nEvaluating: {scen_file} with {num_agents} agents")
-       stats = evaluate_planner(map_file, scen_file, num_agents)
-       results.append({
-           'map': map_file,
-           'scenario': scen_file,
-           'agents': num_agents,
-           'makespan': stats['makespan'],
-           'success_rate': stats['success_rate'],
-           'throughput': stats['throughput']
-       })
-   
-   # Save results
-   df = pd.DataFrame(results)
-   df.to_csv('planner_evaluation.csv', index=False)
-   print("\\nResults saved to planner_evaluation.csv")
-
 Coordinate System Handling
----------------------------
+--------------------------
 
-If your planner uses row-column (y,x) format:
+If your planner writes row-column tuples, keep that order in the file and run
+SMART with ``--flip_coord=1``.
+
+If you prefer to convert the paths yourself, a simple helper looks like:
 
 .. code-block:: python
 
@@ -207,101 +98,30 @@ If your planner uses row-column (y,x) format:
            xy_paths.append(xy_path)
        return xy_paths
 
-Or use the ``--flip_coord=1`` flag when running SMART directly.
+Or simply keep the planner output as ``(y,x,t)`` and use ``--flip_coord=1``.
 
-Dealing with Continuous Time
------------------------------
+Path Requirements
+-----------------
 
-If your planner outputs continuous time paths:
+The current parser expects:
 
-.. code-block:: python
-
-   def discretize_paths(continuous_paths, timestep=1.0):
-       """Convert continuous time paths to discrete timesteps."""
-       discrete_paths = []
-       for agent_path in continuous_paths:
-           discrete = []
-           for x, y, t in agent_path:
-               discrete_t = int(round(t / timestep))
-               discrete.append((x, y, discrete_t))
-           discrete_paths.append(discrete)
-       return discrete_paths
+* one line per agent
+* explicit numeric time values in each tuple
+* axis-aligned moves or wait actions between consecutive locations
+* no diagonal jumps between consecutive locations
+* a path count that matches the number of agents you run
 
 Performance Tips
 ----------------
 
 1. **Use headless mode** for batch experiments
-2. **Pre-compile paths** to avoid repeated planning
-3. **Use appropriate robot parameters** matching your assumptions
-4. **Run multiple trials** for statistical significance
-
-Example: Full Integration
---------------------------
-
-Complete example integrating a custom planner:
-
-.. code-block:: python
-
-   # integrate_my_planner.py
-   
-   import argparse
-   from pathlib import Path
-   from smart_client import SMARTClient
-   from my_planner import MyMAPFPlanner
-   
-   def main():
-       parser = argparse.ArgumentParser()
-       parser.add_argument('--map', required=True)
-       parser.add_argument('--scen', required=True)
-       parser.add_argument('--agents', type=int, required=True)
-       parser.add_argument('--headless', action='store_true')
-       parser.add_argument('--output', default='results.csv')
-       args = parser.parse_args()
-       
-       # Initialize planner
-       planner = MyMAPFPlanner()
-       
-       # Solve MAPF problem
-       print(f"Planning for {args.agents} agents...")
-       solution = planner.solve(
-           map_file=args.map,
-           scen_file=args.scen,
-           num_agents=args.agents
-       )
-       
-       if not solution:
-           print("Planner failed to find solution!")
-           return
-       
-       # Convert to SMART format
-       paths = solution.get_paths()
-       
-       # Execute in SMART
-       print("Running simulation...")
-       client = SMARTClient()
-       client.load_simulation(args.map, args.scen, args.agents)
-       client.set_paths(paths)
-       stats = client.run(headless=args.headless)
-       
-       # Report results
-       print(f"\\nResults:")
-       print(f"  Makespan: {stats['makespan']}")
-       print(f"  Sum of costs: {stats['sum_of_costs']}")
-       print(f"  Success rate: {stats['success_rate']*100:.1f}%")
-       print(f"  Throughput: {stats['throughput']:.2f} agents/sec")
-       
-       # Save detailed stats
-       import json
-       with open(args.output, 'w') as f:
-           json.dump(stats, f, indent=2)
-       print(f"\\nDetailed stats saved to {args.output}")
-   
-   if __name__ == '__main__':
-       main()
+2. **Keep path generation outside SMART** so you can reuse the same plan file
+3. **Use distinct ports and output filenames** for parallel runs
+4. **Run multiple trials** if you are studying variability
 
 Next Steps
 ----------
 
-* :doc:`apis` - Python API reference
-* :doc:`examples` - Example integrations
+* :doc:`apis` - current public interfaces and outputs
+* :doc:`examples` - shipped example files
 * :doc:`usage` - Running simulations

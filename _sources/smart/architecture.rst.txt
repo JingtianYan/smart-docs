@@ -1,54 +1,20 @@
 Architecture
 ============
 
-This page describes SMART's system architecture and design.
+This page summarizes the current SMART architecture as described by the public
+repository and the paper.
 
 Overview
 --------
 
-SMART is built on a modular architecture consisting of:
+The paper describes SMART as three main modules:
 
-1. **Simulator Core** (ARGoS-based)
-2. **Execution Monitor** (Action Dependency Graph)
-3. **RPC Server** (Communication layer)
-4. **Python Client** (API and tools)
+1. **Simulator** - built on ARGoS 3
+2. **Execution monitoring server** - based on the Action Dependency Graph (ADG)
+3. **Executors/controllers** - one per robot
 
-.. code-block:: text
-
-                  ┌─────────────────────────┐
-                  │   MAPF Planner          │
-                  │   (Your Algorithm)      │
-                  └───────────┬─────────────┘
-                              │ Paths
-                              ▼
-                  ┌─────────────────────────┐
-                  │   Python Client API     │
-                  │   (run_sim.py)          │
-                  └───────────┬─────────────┘
-                              │ RPC
-                              ▼
-   ┌──────────────────────────────────────────────┐
-   │              SMART Server (C++)              │
-   ├──────────────────────────────────────────────┤
-   │  ┌────────────────────────────────────────┐  │
-   │  │   Action Dependency Graph (ADG)        │  │
-   │  │   - Parse plans                        │  │
-   │  │   - Build dependency graph             │  │
-   │  │   - Monitor execution                  │  │
-   │  └───────────────┬────────────────────────┘  │
-   │                  │                            │
-   │  ┌───────────────▼────────────────────────┐  │
-   │  │   ARGoS Simulator                      │  │
-   │  │   - Physics engine                     │  │
-   │  │   - Robot controllers                  │  │
-   │  │   - Collision detection                │  │
-   │  └────────────────────────────────────────┘  │
-   └──────────────────────────────────────────────┘
-                              │
-                              ▼
-                  ┌─────────────────────────┐
-                  │   Statistics & Logs     │
-                  └─────────────────────────┘
+In the public repo, ``run_sim.py`` is a convenience wrapper around those
+modules. It is not a separate public client SDK.
 
 Components
 ----------
@@ -58,60 +24,70 @@ ARGoS Simulator
 
 SMART uses `ARGoS 3 <https://www.argos-sim.info/>`_ as the physics-based simulator:
 
-* **Physics Engine** - Realistic 2D dynamics and collisions
-* **Robot Models** - Differential drive robots (footbots)
-* **Sensors** - Position, proximity, obstacle detection
-* **Visualization** - 3D OpenGL rendering
+* **Physics engine** - ``dynamics2d`` in the generated ARGoS config
+* **Robot model** - the current public repo uses the foot-bot controller path
+* **Sensors** - the generated config enables foot-bot proximity and positioning sensors
+* **Visualization** - ARGoS Qt/OpenGL when headless mode is disabled
 
 **Location**: ``client/`` directory
 
 **Key files**:
+
 * ``client/controllers/`` - Robot controller logic
-* ``client/loop_functions/`` - Simulation orchestration
+* ``client/controllers/footbot_diffusion/`` - shipped executor/controller
+* ``client/loop_functions/`` - ARGoS loop function code
 
 Action Dependency Graph (ADG)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ADG monitors plan execution and handles uncertainties:
+The ADG server parses the path file, builds the execution graph, and coordinates
+robot actions:
 
-* **Plan Parser** - Converts paths to action sequences
-* **Graph Builder** - Creates dependency graph from actions
-* **Execution Monitor** - Tracks progress and detects issues
-* **Coordination** - Manages agent interactions
+* **Plan parser** - reads the text path file
+* **Action conversion** - converts timed locations into move/turn actions
+* **Graph builder** - creates ADG dependencies
+* **Execution monitor** - updates node status during execution
 
 **Location**: ``server/`` directory
 
 **Key files**:
-* ``server/inc/parser.h`` - Path parsing
-* ``server/src/ADG_server.cpp`` - Main server logic
+
+* ``server/src/parser.cpp`` - path parsing and action conversion
+* ``server/src/ADG.cpp`` - graph construction and updates
+* ``server/src/ADG_server.cpp`` - RPC server and stats output
 
 RPC Communication
 ^^^^^^^^^^^^^^^^^
 
-Uses `rpclib <https://github.com/rpclib/rpclib>`_ for client-server communication:
+SMART uses `rpclib <https://github.com/rpclib/rpclib>`_ internally between the
+ADG server and the robot executors:
 
 * **Protocol** - MessagePack over TCP
-* **Port** - Default 8182 (configurable)
-* **Methods** - Load scenario, set paths, run simulation, get stats
+* **Port** - Default 8182 in ``run_sim.py``
+* **Role** - robot executors poll the server for actions and report completion
 
-**Key RPC calls**:
-* ``load_scenario(map, scen, agents)``
-* ``set_paths(paths_json)``
-* ``run_simulation(headless)``
-* ``get_statistics()``
+Current methods bound by the public server implementation:
 
-Python Client
-^^^^^^^^^^^^^
+* ``init``
+* ``update``
+* ``receive_update``
+* ``get_config``
+* ``update_finish_agent``
+* ``closeServer``
 
-High-level Python API and CLI tools:
+Wrapper Script
+^^^^^^^^^^^^^^
 
-* **CLI** - ``run_sim.py`` command-line interface
-* **API** - ``SMARTClient`` class for programmatic access
-* **Utilities** - Path conversion, visualization, analysis
+The repository root contains a Python helper script:
+
+* **CLI** - ``run_sim.py`` reads the map, scenario, and path file
+* **Config generation** - ``ArgosConfig/ToArgos.py`` writes the ``.argos`` file
+* **Process launching** - the script starts ``build/server/ADG_server`` and ``argos3``
 
 **Location**: Root directory
 
 **Key files**:
+
 * ``run_sim.py`` - Main CLI entry point
 * ``ArgosConfig/ToArgos.py`` - Configuration generation
 
@@ -121,94 +97,68 @@ Execution Flow
 1. **Initialization**
 
    .. code-block:: text
-   
-      User → run_sim.py → Start ADG_server → Connect RPC
+
+      User -> run_sim.py -> generate .argos -> start ADG_server -> start argos3
 
 2. **Load Scenario**
 
    .. code-block:: text
-   
-      Load .map → Load .scen → Generate ARGoS config → Initialize robots
 
-3. **Set Paths**
+      Load .map -> Load .scen -> generate obstacle boxes and robot start poses
+
+3. **Load Paths**
 
    .. code-block:: text
-   
-      MAPF paths → Parse to actions → Build ADG → Validate
+
+      Path file -> parser -> action list -> ADG
 
 4. **Simulation**
 
    .. code-block:: text
-   
-      ARGoS tick → Update robot states → Check ADG → 
-      Detect delays/collisions → Log events
+
+      Controllers poll server -> execute move/turn actions in ARGoS -> report completion
 
 5. **Results**
 
    .. code-block:: text
-   
-      Simulation complete → Aggregate stats → Return to client
+
+      Simulation complete -> write CSV -> print JSON summary
 
 Data Flow
 ---------
 
-**Path Input**:
+**Input path**:
 
 .. code-block:: text
 
    MAPF Planner
-      ↓
-   paths.txt (discrete waypoints)
-      ↓
-   Python client (validation)
-      ↓
-   RPC (JSON serialization)
-      ↓
+      |
+   paths.txt
+      |
+   run_sim.py
+      |
    ADG Server (parse to actions)
-      ↓
+      |
    ARGoS (continuous execution)
 
-**Statistics Output**:
+**Output statistics**:
 
 .. code-block:: text
 
    ARGoS (execution events)
-      ↓
+      |
    ADG (aggregation)
-      ↓
-   RPC (JSON response)
-      ↓
-   Python client
-      ↓
-   CSV file / Python dict
+      |
+   CSV row + JSON summary
 
 Design Principles
 -----------------
 
-**Modularity**
+The paper emphasizes three main goals:
 
-Each component has a well-defined interface:
-
-* Planner-agnostic: works with any MAPF algorithm
-* Swappable simulator: ARGoS can be replaced
-* Extensible: easy to add new metrics or features
-
-**Scalability**
-
-Designed for large numbers of agents:
-
-* Efficient ADG representation
-* Spatial hashing for collision detection
-* Parallel simulation (when using ARGoS parallelization)
-
-**Realism**
-
-Bridges planning and reality:
-
-* Physics-based dynamics
-* Execution uncertainty
-* Communication delays
-* Sensor noise (configurable)
+* realistic execution through a physics-based simulator
+* planner-agnostic path execution through the ADG framework
+* scalability to large robot counts in headless experiments
 
 Code Structure
 --------------
@@ -216,19 +166,15 @@ Code Structure
 .. code-block:: text
 
    smart/
-   ├── client/              # ARGoS components
-   │   ├── controllers/     # Robot controllers
-   │   ├── loop_functions/  # Simulation logic
-   │   └── embedding/       # Utilities
+   ├── client/              # ARGoS controllers and related code
    ├── server/              # ADG server
-   │   ├── inc/             # Headers
-   │   └── src/             # Implementation
-   ├── ArgosConfig/         # Config generation
-   ├── build/               # Build outputs
-   ├── docs/                # Documentation
-   ├── tests/               # Unit tests
-   ├── run_sim.py           # Main CLI
-   └── CMakeLists.txt       # Build config
+   ├── ArgosConfig/         # ARGoS XML generation
+   ├── run_sim.py           # main helper script
+   ├── example_paths_xy.txt
+   ├── example_paths_yx.txt
+   ├── random-32-32-20.map
+   ├── random-32-32-20-random-1.scen
+   └── CMakeLists.txt
 
 Build System
 ------------
@@ -237,82 +183,38 @@ SMART uses CMake for building:
 
 .. code-block:: cmake
 
-   # Top-level CMakeLists.txt structure
    cmake_minimum_required(VERSION 3.16)
    project(Lifelong_SMART)
-   
-   # Build options
+
    option(BUILD_SERVER "Build ADG server" ON)
    option(BUILD_CLIENT "Build ARGoS client" ON)
-   
-   # Dependencies
+
    find_package(Boost REQUIRED)
-   find_package(ARGoS REQUIRED)
-   
-   # Subdirectories
-   add_subdirectory(server)
-   add_subdirectory(client)
-
-Threading Model
----------------
-
-* **Main Thread** - ARGoS simulation loop
-* **RPC Thread** - Handles client requests
-* **Worker Threads** - Physics computations (ARGoS internal)
-
-Thread safety is ensured through:
-* Mutex locks on shared state
-* Message queues for commands
-* Atomic operations for statistics
+   find_package(ARGoS QUIET)
 
 Performance Considerations
 --------------------------
 
-**Bottlenecks**:
+What is clearly visible in the public codebase:
 
-1. Physics simulation (ARGoS)
-2. Collision detection
-3. RPC serialization (for large path sets)
-
-**Optimizations**:
-
-* Spatial hashing for O(1) neighbor queries
-* Lazy ADG evaluation
-* Batch RPC calls
-* Compiled with -O3 optimization
-
-**Scaling**:
-
-* ~100 agents: Real-time with visualization
-* ~1000 agents: Real-time headless
-* 1000+ agents: Use time-scaling or distributed simulation
+* the generated ARGoS config sets ``threads="32"``
+* the server uses mutex-protected RPC handlers
+* release-style compiler flags are enabled in the CMake files
+* the paper reports headless experiments up to 2,000 robots
 
 Extending SMART
 ---------------
 
-**Add a new metric**:
+Common extension points in the public repo:
 
-1. Modify ``server/src/ADG_server.cpp`` to track the metric
-2. Update statistics struct
-3. Return via RPC
-4. Parse in Python client
-
-**Add a new robot model**:
-
-1. Create controller in ``client/controllers/``
-2. Register in ``CMakeLists.txt``
-3. Update ARGoS config generation
-4. Add Python API wrapper
-
-**Add a new sensor**:
-
-1. Implement sensor in ARGoS controller
-2. Expose data via RPC
-3. Add Python API method
+* add a new metric in ``server/src/ADG_server.cpp``
+* add or modify a controller in ``client/controllers/``
+* change ARGoS XML generation in ``ArgosConfig/ToArgos.py``
+* adjust parsing rules in ``server/src/parser.cpp``
 
 Next Steps
 ----------
 
 * `ARGoS Documentation <https://www.argos-sim.info/documentation.php>`_
 * `rpclib Documentation <https://github.com/rpclib/rpclib>`_
-* :doc:`../contributing` - Contributing guide
+* :doc:`usage` - Running the public workflow
