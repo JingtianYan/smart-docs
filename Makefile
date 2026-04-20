@@ -17,3 +17,6 @@ docker-npm-dev:
 	docker-compose run sphinx_rtd_theme dev
 
 docker-build-all: docker-images docker-npm-build
+
+deploy-pages:
+	bash scripts/deploy-gh-pages.sh
