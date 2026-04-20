@@ -128,7 +128,7 @@ WORKTREE_ACTIVE=1
 
 log "Updating $PUBLISH_BRANCH contents"
 find "$PUBLISH_DIR" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-rsync -a --delete "$TEMP_BUILD"/ "$PUBLISH_DIR"/
+rsync -a --delete --exclude .git "$TEMP_BUILD"/ "$PUBLISH_DIR"/
 
 git -C "$PUBLISH_DIR" add -A
 
