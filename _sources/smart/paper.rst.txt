@@ -1,7 +1,7 @@
 Paper and citation
 ==================
 
-Advancing MAPF towards the Real World: A Scalable Multi-Agent Realistic
+Advancing MAPF Toward the Real World: A Scalable Multi-Agent Realistic
 Testbed (SMART)
 
 Summary
@@ -13,10 +13,11 @@ better model kinodynamics and execution uncertainty, uses an Action Dependency
 Graph for execution monitoring, and focuses on scaling to large numbers of
 agents.
 
-Access the full paper on arXiv:
+Access the published paper and preprint:
 
-* https://arxiv.org/abs/2503.04798
-* PDF: https://arxiv.org/pdf/2503.04798
+* IEEE Xplore: https://ieeexplore.ieee.org/document/11495177
+* DOI: https://doi.org/10.1109/LRA.2026.3688062
+* arXiv preprint: https://arxiv.org/abs/2503.04798
 
 Version information verified from arXiv:
 
@@ -27,5 +28,6 @@ Cite as
 -------
 
 Yan, J., Li, Z., Kang, W., Zheng, K., Zhang, Y., Chen, Z., Zhang, Y., Harabor,
-D., Smith, S. F., & Li, J. (2025). Advancing MAPF towards the Real World: A
-Scalable Multi-Agent Realistic Testbed (SMART). arXiv:2503.04798.
+D., Smith, S. F., & Li, J. (2026). Advancing MAPF Toward the Real World: A
+Scalable Multi-Agent Realistic Testbed (SMART). IEEE Robotics and Automation
+Letters, 11(6), 7428--7435. https://doi.org/10.1109/LRA.2026.3688062.

@@ -10,7 +10,7 @@ maps and scenarios into runnable experiments.
 This documentation site tracks the current public SMART sources:
 
 * Source code: `smart-mapf/smart <https://github.com/smart-mapf/smart>`_
-* Paper: `arXiv:2503.04798 <https://arxiv.org/abs/2503.04798>`_
+* Paper: `publisher <https://ieeexplore.ieee.org/document/11495177>`_, `arXiv <https://arxiv.org/abs/2601.01234>`_
 * Documentation source: `JingtianYan/smart-docs <https://github.com/JingtianYan/smart-docs>`_
 
 Video Demo
@@ -53,17 +53,22 @@ Research Paper
 --------------
 
 The technical background and evaluation are described in the SMART paper:
-`Advancing MAPF towards the Real World: A Scalable Multi-Agent Realistic Testbed (SMART) <https://arxiv.org/abs/2503.04798>`_.
+`Advancing MAPF Toward the Real World: A Scalable Multi-Agent Realistic Testbed (SMART) <https://ieeexplore.ieee.org/document/11495177>`_.
 
 Please cite it as:
 
 .. code-block:: bibtex
 
-   @article{yan2025smart,
-     title={Advancing MAPF towards the Real World: A Scalable Multi-Agent Realistic Testbed (SMART)},
-     author={Yan, Jingtian and Li, Zhifei and Kang, William and Zheng, Kevin and Zhang, Yulun and Chen, Zhe and Zhang, Yue and Harabor, Daniel and Smith, Stephen F and Li, Jiaoyang},
-     journal={arXiv preprint arXiv:2503.04798},
-     year={2025}
+   @article{yan2026smart,
+     title={Advancing MAPF Toward the Real World: A Scalable Multi-Agent Realistic Testbed (SMART)},
+     author={Yan, Jingtian and Li, Zhifei and Kang, William and Zheng, Kevin and Zhang, Yulun and Chen, Zhe and Zhang, Yue and Harabor, Daniel and Smith, Stephen F. and Li, Jiaoyang},
+     journal={IEEE Robotics and Automation Letters},
+     volume={11},
+     number={6},
+     pages={7428--7435},
+     year={2026},
+     month={June},
+     doi={10.1109/LRA.2026.3688062}
    }
 
 Participate

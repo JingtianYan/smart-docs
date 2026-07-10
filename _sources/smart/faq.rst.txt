@@ -251,4 +251,4 @@ Check these resources:
 * :doc:`overview` - Project overview
 * :doc:`usage` - Detailed usage guide
 * :doc:`apis` - Public interfaces and outputs
-* `Paper <https://arxiv.org/abs/2503.04798>`_ - Technical details
+* `Paper <https://ieeexplore.ieee.org/document/11495177>`_ - Technical details
