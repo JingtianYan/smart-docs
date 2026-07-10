@@ -9,7 +9,7 @@ Public References
 The following public references are easy to verify:
 
 * The SMART paper:
-  `Advancing MAPF towards the Real World: A Scalable Multi-Agent Realistic Testbed (SMART) <https://arxiv.org/abs/2503.04798>`_
+  `Advancing MAPF Toward the Real World: A Scalable Multi-Agent Realistic Testbed (SMART) <https://ieeexplore.ieee.org/document/11495177>`_
 * The public source repository:
   `smart-mapf/smart <https://github.com/smart-mapf/smart>`_
 * The public web demo:
@@ -20,10 +20,11 @@ Publications Using SMART
 
 The paper currently referenced throughout this documentation site is:
 
-**2025**
+**2026**
 
-* Yan, J., et al. "Advancing MAPF towards the Real World: A Scalable Multi-Agent
-  Realistic Testbed (SMART)." arXiv:2503.04798 (2025).
+* Yan, J., et al. "Advancing MAPF Toward the Real World: A Scalable Multi-Agent
+  Realistic Testbed (SMART)." IEEE Robotics and Automation Letters 11(6):
+  7428--7435 (2026). https://doi.org/10.1109/LRA.2026.3688062.
 
 If you know of additional public papers, demos, or deployments that should be
 listed here, please share them.
