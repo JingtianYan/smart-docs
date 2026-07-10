@@ -10,7 +10,7 @@ maps and scenarios into runnable experiments.
 This documentation site tracks the current public SMART sources:
 
 * Source code: `smart-mapf/smart <https://github.com/smart-mapf/smart>`_
-* Paper: `publisher <https://ieeexplore.ieee.org/document/11495177>`_, `arXiv <https://arxiv.org/abs/2601.01234>`_
+* Paper: `publisher <https://ieeexplore.ieee.org/document/11495177>`_, `arXiv <https://arxiv.org/abs/2503.04798>`_
 * Documentation source: `JingtianYan/smart-docs <https://github.com/JingtianYan/smart-docs>`_
 
 Video Demo
